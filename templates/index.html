@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>FoodMenu</title>
+</head>
+<body>
+{% for restaurant in foodlist %}
+	{% if 'Menu' in restaurant %}
+		<div class="restaurant_name">{{ restaurant.Name }}:</div>
+		<br/>
+		{% for day in days %}
+			{% if day in restaurant.Menu %}
+				<div class="day">{{ day }}:</div>
+				<br/>
+				{% for meal in restaurant.Menu[day] %}
+					<div class="meal">{{ meal }}:</div>
+					<div class="items">
+					{% if restaurant.Menu[day][meal].Items.result is string %}
+						{{ restaurant.Menu[day][meal].Items.result }}
+						<br/>
+					{% else %}
+						{% for item in restaurant.Menu[day][meal].Items.result %}
+							{{ item }}
+							<br/>
+						{% endfor %}
+					{% endif %}
+					</div>
+					<br/>
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	<br/>
+{% endfor %}
+</body>
+</html>
