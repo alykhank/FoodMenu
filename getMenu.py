@@ -1,7 +1,6 @@
 #! /usr/bin/python
 
-# import simplejson, urllib
-import json, urllib2, pickle
+import json, requests
 
 apiKey = open('apiKey.txt', 'r')
 key = apiKey.readline()
@@ -13,11 +12,11 @@ service = 'FoodMenu'
 request = 'http://api.uwaterloo.ca/public/v1/'
 
 def getMenu():
-    url = request + '?' + 'key=' + key + '&' + 'service=' + service
-    result = json.load(urllib2.urlopen(url))
-    return result
-    
+	url = request + '?' + 'key=' + key + '&' + 'service=' + service
+	result = requests.get(url).text
+	return result
+
 menu = getMenu()
 jsonResponseFile = open('response.txt', 'w')
-pickle.dump(menu, jsonResponseFile)
+jsonResponseFile.write(menu)
 jsonResponseFile.close()
