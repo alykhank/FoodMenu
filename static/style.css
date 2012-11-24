@@ -1,0 +1,19 @@
+body {
+	font-family: Helvetica, sans-serif;
+}
+
+.restaurant_name {
+	font-size: 24px;
+}
+
+.day {
+	text-indent: 50px;
+}
+
+.meal {
+	text-indent: 100px;
+}
+
+.items {
+	margin-left: 100px;
+}
