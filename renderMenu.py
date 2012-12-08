@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import json
+import json, os
 
 from flask import Flask, render_template, url_for
 
@@ -16,4 +16,6 @@ def renderMenu():
 	return render_template('index.html', menu=menu, foodlist=foodlist, days=days)
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0')
+	# Bind to PORT if defined, otherwise default to 5000.
+	port = int(os.environ.get('PORT', 5000))
+	app.run(host='0.0.0.0', port=port)
