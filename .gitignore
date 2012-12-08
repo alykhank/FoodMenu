@@ -1,2 +1,15 @@
-.DS_Store
-apiKey.txt
+#Exclude Virtualenv artifacts from source control tracking
+venv
+
+# Standard ignores
+*.pyc
+*.pyo
+*.DS_Store
+*.swp
+*.idea
+*.project
+*.pydevproject
+*.kpf
+
+# Don't store secret keys in version control
+secret_keys.py

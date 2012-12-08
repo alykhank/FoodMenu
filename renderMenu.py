@@ -13,7 +13,7 @@ def renderMenu():
 		menu = json.load(jsonResponseFile)['response']['data']
 
 	foodlist = menu['Restaurants'].values()
-	return render_template('index.html', foodlist=foodlist, days=days)
+	return render_template('index.html', menu=menu, foodlist=foodlist, days=days)
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host='0.0.0.0')

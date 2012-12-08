@@ -3,35 +3,45 @@
 <head>
 	<title>FoodMenu</title>
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 </head>
 <body>
-{% for restaurant in foodlist %}
-	{% if 'Menu' in restaurant %}
-		<div class="restaurant_name">{{ restaurant.Name }}:</div>
-		<br/>
-		{% for day in days %}
-			{% if day in restaurant.Menu %}
-				<div class="day">{{ day }}:</div>
-				<br/>
-				{% for meal in restaurant.Menu[day] %}
-					<div class="meal">{{ meal }}:</div>
-					<div class="items">
-					{% if restaurant.Menu[day][meal].Items.result is string %}
-						{{ restaurant.Menu[day][meal].Items.result }}
-						<br/>
-					{% else %}
-						{% for item in restaurant.Menu[day][meal].Items.result %}
-							{{ item }}
-							<br/>
-						{% endfor %}
-					{% endif %}
-					</div>
+	<hr id="topline" />
+	<p>This menu is valid from {{ menu['Start'] }} to {{ menu['End'] }}.</p>
+	{% for restaurant in foodlist %}
+		{% if 'Menu' in restaurant %}
+			<div class="location">
+			<div class="restaurant_name">{{ restaurant.Name }}:</div>
+			<br/>
+			{% for day in days %}
+				{% if day in restaurant.Menu %}
+					<div class="day">{{ day }}:</div>
 					<br/>
-				{% endfor %}
-			{% endif %}
-		{% endfor %}
-	{% endif %}
-	<br/>
-{% endfor %}
+					{% for meal in restaurant.Menu[day] %}
+						<div class="meal">{{ meal }}:</div>
+						<div class="items">
+						{% if restaurant.Menu[day][meal].Items.result is string %}
+							<li>
+							<ul>{{ restaurant.Menu[day][meal].Items.result }}</ul>
+							</li>
+							<!-- <br/> -->
+						{% else %}
+							{% for item in restaurant.Menu[day][meal].Items.result %}
+								<li>
+								<ul>{{ item }}</ul>
+								</li>
+								<!-- <br/> -->
+							{% endfor %}
+						{% endif %}
+						</div>
+						<br/>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+			<br/>
+			</div>
+		{% endif %}
+	{% endfor %}
 </body>
 </html>

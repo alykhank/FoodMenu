@@ -30,6 +30,7 @@ print
 print('This menu is valid from ' + data['Start'] + ' to ' + data['End'] + '.')
 print
 print
+# print json.dumps(data, indent=1)
 
 for restaurant, foodlist in data['Restaurants'].iteritems():
 	displayMenu(restaurant, foodlist)
