@@ -19,6 +19,11 @@ ul {
     height: 4px;
 }
 
+#valid {
+	margin: 10px;
+	width: 400px;
+}
+
 .location {
 	float: left;
 	margin: 10px;
