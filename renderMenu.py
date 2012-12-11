@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import json, os
+import json, os, datetime
 
 from flask import Flask, render_template, url_for
 
@@ -8,7 +8,10 @@ app = Flask(__name__)
 @app.route("/")
 def renderMenu():
 	menu = None
-	days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+	currentDay = datetime.datetime.now().weekday()
+	days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+	if currentDay <= 4: # if Monday-Friday, only display menu for current and upcoming weekdays
+		days = days[currentDay:]
 	with open('response.txt') as jsonResponseFile:
 		menu = json.load(jsonResponseFile)['response']['data']
 
