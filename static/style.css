@@ -22,7 +22,7 @@ ul {
 
 #valid {
 	margin: 10px;
-	width: 400px;
+	min-width: 400px;
 }
 
 .location {
