@@ -1,10 +1,11 @@
-#! /usr/bin/python
+#!/usr/bin/env python
 
-import json, requests
+import json, os, requests
 
-apiKey = open('apiKey.txt', 'r')
-key = apiKey.readline()
-apiKey.close()
+# apiKey = open('apiKey.txt', 'r')
+# key = apiKey.readline()
+# apiKey.close()
+key = os.environ['UWOPENDATA_APIKEY']
 
 service = 'FoodMenu'
 # output = 'json'
