@@ -13,6 +13,7 @@
 </head>
 <body>
 	<hr id="topline" />
+	<div id="current">It is currently {{ currentDatetime }}.</div>
 	<div id="valid">This menu is valid from {{ menu['Start'] }} to {{ menu['End'] }}.</div>
 	{% for restaurant in foodlist %}
 		{% if 'Menu' in restaurant %}

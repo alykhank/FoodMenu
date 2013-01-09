@@ -20,6 +20,11 @@ ul {
     height: 6px;
 }
 
+#current {
+	margin: 10px;
+	min-width: 400px;
+}
+
 #valid {
 	margin: 10px;
 	min-width: 400px;

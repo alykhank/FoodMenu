@@ -9,7 +9,9 @@ app = Flask(__name__)
 @app.route("/")
 def renderMenu():
 	menu = None
-	currentDay = datetime.now().weekday()
+	now = datetime.now()
+	currentDatetime = now.strftime('%I:%M %p on %A, %B %d, %Y')
+	currentDay = now.weekday()
 	days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 	if currentDay <= 4: # if Monday-Friday, only display menu for current and upcoming weekdays
 		days = days[currentDay:]
@@ -17,7 +19,7 @@ def renderMenu():
 		menu = json.load(jsonResponseFile)['response']['data']
 
 	foodlist = menu['Restaurants'].values()
-	return render_template('index.html', menu=menu, foodlist=foodlist, days=days)
+	return render_template('index.html', menu=menu, foodlist=foodlist, currentDatetime=currentDatetime, days=days)
 
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
