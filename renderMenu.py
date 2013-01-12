@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json, os
 from datetime import datetime, timedelta
+from pytz import timezone
 
 from flask import Flask, render_template, url_for
 
@@ -9,9 +10,10 @@ app = Flask(__name__)
 @app.route("/")
 def renderMenu():
 	menu = None
-	now = datetime.now()
-	currentDatetime = now.strftime('%I:%M %p on %A, %B %d, %Y')
-	currentDay = now.weekday()
+	waterlooTimezone = timezone('America/Toronto')
+	nowWaterloo = datetime.now(waterlooTimezone)
+	currentDatetime = nowWaterloo.strftime('%I:%M %p on %A, %B %d, %Y')
+	currentDay = nowWaterloo.weekday()
 	days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 	if currentDay <= 4: # if Monday-Friday, only display menu for current and upcoming weekdays
 		days = days[currentDay:]
