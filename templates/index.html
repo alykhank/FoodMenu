@@ -12,6 +12,10 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" type="image/png" href="{{ url_for('static', filename='uwfs.png') }}" />
 </head>
 <body>
+	{% set currentDay = nowWaterloo.weekday() %}
+	{% if currentDay <= 4 %}
+		{% set days = days[currentDay:] %}
+	{% endif %}
 	<hr id="topline" />
 	<div id="current">It is currently {{ currentDatetime }}.</div>
 	<div id="valid">This menu is valid from {{ menu['Start'] }} to {{ menu['End'] }}.</div>
@@ -20,28 +24,32 @@
 			<div class="location">
 			<div class="restaurant_name">{{ restaurant.Name }}:</div>
 			<br/>
+			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in days %}
 				{% if day in restaurant.Menu %}
 					<div class="day">{{ day }}:</div>
 					<br/>
-					{% for meal in restaurant.Menu[day] %}
-						<div class="meal">{{ meal }}:</div>
-						<div class="items">
-						{% if restaurant.Menu[day][meal].Items.result is string %}
-							<li>
-							<ul>{{ restaurant.Menu[day][meal].Items.result }}</ul>
-							</li>
-							<!-- <br/> -->
-						{% else %}
-							{% for item in restaurant.Menu[day][meal].Items.result %}
+					{% set meals = ['Breakfast', 'Lunch', 'Dinner'] %}
+					{% for meal in meals %}
+						{% if meal in restaurant.Menu[day] %}
+							<div class="meal">{{ meal }}:</div>
+							<div class="items">
+							{% if restaurant.Menu[day][meal].Items.result is string %}
 								<li>
-								<ul>{{ item }}</ul>
+								<ul>{{ restaurant.Menu[day][meal].Items.result }}</ul>
 								</li>
 								<!-- <br/> -->
-							{% endfor %}
+							{% else %}
+								{% for item in restaurant.Menu[day][meal].Items.result %}
+									<li>
+									<ul>{{ item }}</ul>
+									</li>
+									<!-- <br/> -->
+								{% endfor %}
+							{% endif %}
+							</div>
+							<br/>
 						{% endif %}
-						</div>
-						<br/>
 					{% endfor %}
 				{% endif %}
 			{% endfor %}

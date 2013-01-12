@@ -13,15 +13,15 @@ def renderMenu():
 	waterlooTimezone = timezone('America/Toronto')
 	nowWaterloo = datetime.now(waterlooTimezone)
 	currentDatetime = nowWaterloo.strftime('%I:%M %p on %A, %B %d, %Y')
-	currentDay = nowWaterloo.weekday()
-	days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-	if currentDay <= 4: # if Monday-Friday, only display menu for current and upcoming weekdays
-		days = days[currentDay:]
+	# currentDay = nowWaterloo.weekday()
+	# days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+	# if currentDay <= 4: # if Monday-Friday, only display menu for current and upcoming weekdays
+	# 	days = days[currentDay:]
 	with open('response.txt') as jsonResponseFile:
 		menu = json.load(jsonResponseFile)['response']['data']
 
 	foodlist = menu['Restaurants'].values()
-	return render_template('index.html', menu=menu, foodlist=foodlist, currentDatetime=currentDatetime, days=days)
+	return render_template('index.html', menu=menu, foodlist=foodlist, nowWaterloo=nowWaterloo, currentDatetime=currentDatetime)
 
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
