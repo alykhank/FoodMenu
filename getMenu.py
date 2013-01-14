@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
 import json, os, requests
+from awsauth import S3Auth
 
-# apiKey = open('apiKey.txt', 'r')
-# key = apiKey.readline()
-# apiKey.close()
 key = os.environ['UWOPENDATA_APIKEY']
 
 service = 'FoodMenu'
@@ -18,6 +16,6 @@ def getMenu():
 	return result
 
 menu = getMenu()
-jsonResponseFile = open('response.txt', 'w')
-jsonResponseFile.write(menu)
-jsonResponseFile.close()
+ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+requests.put('http://s3.amazonaws.com/uwfoodmenu/response.txt', data=menu, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
