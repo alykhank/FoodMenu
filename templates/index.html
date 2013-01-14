@@ -10,7 +10,20 @@
 	<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='apple-touch-icon-144x144.png') }}" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" type="image/png" href="{{ url_for('static', filename='apple-touch-icon-144x144.png') }}" />
-	<link rel="apple-touch-startup-image" sizes="640x1096" type="image/png" href="{{ url_for('static', filename='startup-640x1096.png') }}">
+	<!-- iPhone -->
+	<link href="{{ url_for('static', filename='startup-320x460.png') }}" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+	<!-- iPhone (Retina) -->
+	<link href="{{ url_for('static', filename='startup-640x920.png') }}" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPhone 5 -->
+	<link href="{{ url_for('static', filename='startup-640x1096.png') }}"  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- iPad Portrait -->
+	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-Portrait.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image"> -->
+	<!-- iPad Landscape -->
+	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-Landscape.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image"> -->
+	<!-- iPad Portrait (Retina) -->
+	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-RETINA-Portrait.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> -->
+	<!-- iPad Landscape (Retina) -->
+	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-RETINA-Landscape.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> -->
 </head>
 <body>
 	<hr id="topline" />
