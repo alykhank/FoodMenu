@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta name="viewport" content="initial-scale=0.75, user-scalable=no">
+	<meta name="viewport" content="initial-scale=1, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="UW Menu">
 	<title>UW Menu</title>
@@ -33,8 +33,7 @@
 			<h3>UW Menu</h3>
 		</div>
 		<div data-role="content">
-			<h5 id="current">It is currently {{ currentDatetime }}.</h5>
-			<h5 id="valid">This menu is valid from {{ menu['Start'] }} to {{ menu['End'] }}.</h5>
+			<h4>It is currently {{ currentDatetime }}. This menu is valid from {{ menu['Start'].replace('-',' ',1).replace('-',', ') }} to {{ menu['End'].replace('-',' ',1).replace('-',', ') }}.</h4>
 			<div data-role="collapsible-set">
 				{% for restaurant in foodlist if 'Menu' in restaurant %}
 				<div data-role="collapsible">
