@@ -5,7 +5,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="UW Menu">
 	<title>UW Menu</title>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
@@ -26,43 +28,54 @@
 	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-RETINA-Landscape.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> -->
 </head>
 <body>
-	<hr id="topline" />
-	<div id="current">It is currently {{ currentDatetime }}.</div>
-	<div id="valid">This menu is valid from {{ menu['Start'] }} to {{ menu['End'] }}.</div>
-	{% for restaurant in foodlist if 'Menu' in restaurant %}
-		<div class="location">
-		<div class="restaurant_name">{{ restaurant.Name }}:</div>
-		<br/>
-		{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
-		{% set currentDay = nowWaterloo.weekday() %}
-		{# If Monday-Friday, only display menu for current and next day #}
-		{% if currentDay <= 4 %}
-			{% set days = days[currentDay:currentDay+2] %}
-		{% endif %}
-		{% for day in days if day in restaurant.Menu %}
-			<div class="day">{{ day }}:</div>
-			<br/>
-			{% set meals = ['Breakfast', 'Lunch', 'Dinner'] %}
-			{% for meal in meals if meal in restaurant.Menu[day] %}
-				<div class="meal">{{ meal }}:</div>
-				<div class="items">
-				{% if restaurant.Menu[day][meal].Items.result is string %}
-					<li>
-					<ul>{{ restaurant.Menu[day][meal].Items.result }}</ul>
-					</li>
-				{% else %}
-					{% for item in restaurant.Menu[day][meal].Items.result %}
-						<li>
-						<ul>{{ item }}</ul>
-						</li>
-					{% endfor %}
-				{% endif %}
-				</div>
-				<br/>
-			{% endfor %}
-		{% endfor %}
-		<br/>
+	<div data-role="page" id="home">
+		<div data-theme="a" data-role="header" data-position="fixed">
+			<h3>UW Menu</h3>
 		</div>
-	{% endfor %}
+		<div data-role="content">
+			<h5 id="current">It is currently {{ currentDatetime }}.</h5>
+			<h5 id="valid">This menu is valid from {{ menu['Start'] }} to {{ menu['End'] }}.</h5>
+			<div data-role="collapsible-set">
+				{% for restaurant in foodlist if 'Menu' in restaurant %}
+				<div data-role="collapsible">
+					<h3>{{ restaurant.Name }}</h3>
+					{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
+					{% set currentDay = nowWaterloo.weekday() %}
+					{# If Monday-Friday, only display menu for current and next day #}
+					{% if currentDay <= 4 %}
+						{% set days = days[currentDay:currentDay+2] %}
+					{% endif %}
+					<ul data-role="listview" data-divider-theme="b" data-inset="true">
+					{% for day in days if day in restaurant.Menu %}
+						<li data-role="list-divider" role="heading">{{ day }}</li>
+						{% set meals = ['Breakfast', 'Lunch', 'Dinner'] %}
+						{% for meal in meals if meal in restaurant.Menu[day] %}
+						<li data-theme="c">
+							<a href="#detail" data-transition="slide">
+								<div>{{ meal }}:</div>
+								<div>
+									{% if restaurant.Menu[day][meal].Items.result is string %}
+									<h3>{{ restaurant.Menu[day][meal].Items.result }}</h3>
+									{% else %}
+									{% for item in restaurant.Menu[day][meal].Items.result %}
+									<h3>{{ item }}</h3>
+									{% endfor %}
+									{% endif %}
+								</div>
+							</a>
+						</li>
+						{% endfor %}
+					{% endfor %}
+					</ul>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<h3>
+				Alykhan Kanji
+			</h3>
+		</div>
+	</div>
 </body>
 </html>
