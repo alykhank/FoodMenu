@@ -1,3 +1,0 @@
-Retrieves, parses, and displays Food Menu from University of Waterloo OpenData API using Flask and Jinja2.
-Deployed on Heroku.
-Store API Key in environment variable.
