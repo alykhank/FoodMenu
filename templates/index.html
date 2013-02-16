@@ -44,24 +44,24 @@
 					{% if currentDay <= 4 %}
 						{% set days = days[currentDay:currentDay+2] %}
 					{% endif %}
-					<ul data-role="listview" data-divider-theme="b" data-inset="true">
+					<ul data-role="listview" data-divider-theme="b" data-inset="false">
 					{% for day in days if day in restaurant.Menu %}
 						<li data-role="list-divider" role="heading">{{ day }}</li>
 						{% set meals = ['Breakfast', 'Lunch', 'Dinner'] %}
 						{% for meal in meals if meal in restaurant.Menu[day] %}
 						<li data-theme="c">
-							<a href="#detail" data-transition="slide">
-								<div>{{ meal }}:</div>
-								<div>
-									{% if restaurant.Menu[day][meal].Items.result is string %}
-									<h3>{{ restaurant.Menu[day][meal].Items.result }}</h3>
-									{% else %}
-									{% for item in restaurant.Menu[day][meal].Items.result %}
-									<h3>{{ item }}</h3>
-									{% endfor %}
-									{% endif %}
-								</div>
-							</a>
+							<!-- <a href="#detail" data-transition="slide"> -->
+							<div>{{ meal }}:</div>
+							<div>
+								{% if restaurant.Menu[day][meal].Items.result is string %}
+								<h3>{{ restaurant.Menu[day][meal].Items.result }}</h3>
+								{% else %}
+								{% for item in restaurant.Menu[day][meal].Items.result %}
+								<h3>{{ item }}</h3>
+								{% endfor %}
+								{% endif %}
+							</div>
+							<!-- </a> -->
 						</li>
 						{% endfor %}
 					{% endfor %}
