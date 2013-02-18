@@ -31,7 +31,7 @@ typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var
 e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
 mixpanel.init("bc50c8ecc91a1d86256e4eff02f98bad");</script><!-- end Mixpanel -->
 </head>
-<body onload="mixpanel.track('Load Menu')">
+<body onload="mixpanel.track('Page View', {'Page Name': document.title, 'URL': window.location.pathname})">
 	<div data-role="page" id="home">
 		<div data-theme="a" data-role="header" data-position="fixed">
 			<h3>UW Menu</h3>
@@ -41,7 +41,7 @@ mixpanel.init("bc50c8ecc91a1d86256e4eff02f98bad");</script><!-- end Mixpanel -->
 			<div data-role="collapsible-set">
 				{% for restaurant in foodlist if 'Menu' in restaurant %}
 				<div data-role="collapsible">
-					<h3 onclick="mixpanel.track('Expand {{restaurant.Name}}')">{{ restaurant.Name }}</h3>
+					<h3 onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.Name}}'})">{{ restaurant.Name }}</h3>
 					{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 					{% set currentDay = nowWaterloo.weekday() %}
 					{# If Monday-Friday, only display menu for current and next day #}
