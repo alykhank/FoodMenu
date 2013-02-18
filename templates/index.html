@@ -6,8 +6,6 @@
 	<meta name="apple-mobile-web-app-title" content="UW Menu">
 	<title>UW Menu</title>
 	<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
@@ -26,8 +24,14 @@
 	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-RETINA-Portrait.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> -->
 	<!-- iPad Landscape (Retina) -->
 	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-RETINA-Landscape.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
+typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,
+e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
+mixpanel.init("bc50c8ecc91a1d86256e4eff02f98bad");</script><!-- end Mixpanel -->
 </head>
-<body>
+<body onload="mixpanel.track('Load Menu')">
 	<div data-role="page" id="home">
 		<div data-theme="a" data-role="header" data-position="fixed">
 			<h3>UW Menu</h3>
@@ -37,7 +41,7 @@
 			<div data-role="collapsible-set">
 				{% for restaurant in foodlist if 'Menu' in restaurant %}
 				<div data-role="collapsible">
-					<h3>{{ restaurant.Name }}</h3>
+					<h3 onclick="mixpanel.track('Expand {{restaurant.Name}}')">{{ restaurant.Name }}</h3>
 					{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 					{% set currentDay = nowWaterloo.weekday() %}
 					{# If Monday-Friday, only display menu for current and next day #}
