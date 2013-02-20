@@ -49,7 +49,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 		<div data-role="content">
 			<h4>It is currently {{ currentDatetime }}. This menu is valid from {{ menu['Start'].replace('-',' ',1).replace('-',', ') }} to {{ menu['End'].replace('-',' ',1).replace('-',', ') }}.</h4>
 			<div data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-				{% for restaurant in foodlist if 'Menu' in restaurant %}
+				{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
 				<div data-role="collapsible">
 					<h3 onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.Name}}'})">{{ restaurant.Name }}</h3>
 					{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
