@@ -7,7 +7,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-title" content="UW Menu">
 	<title>UW Menu</title>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
 	<!-- iPhone -->
@@ -25,7 +25,7 @@
 	<!-- iPad Landscape (Retina) -->
 	<!-- <link href="http://www.example.com/mobile/images/apple-startup-iPad-RETINA-Landscape.jpg" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> -->
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 	<!-- start Google Analytics --><script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-20277066-3']);
@@ -48,28 +48,31 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 		</div>
 		<div data-role="content">
 			<h4>It is currently {{ currentDatetime }}. This menu is valid from {{ menu['Start'].replace('-',' ',1).replace('-',', ') }} to {{ menu['End'].replace('-',' ',1).replace('-',', ') }}.</h4>
-			<ul data-role="listview" data-inset="true">
+			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
 			{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
 				<li onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.Name}}'})"><a href="#{{ restaurant.Name }}" data-transition="slide">{{ restaurant.Name }}</a></li>
 			{% endfor %}
 			</ul>
-			<a data-role="button" data-transition="flip" href="#about" data-icon="info" data-iconpos="left">
-				About
+		</div>
+		<div data-theme="c" data-role="footer" data-position="fixed">
+			<h3>Crafted by Alykhan Kanji</h3>
+			<a data-role="button" data-transition="flip" href="#about" data-inline="true" data-icon="info" data-iconpos="notext" data-iconshadow="false" class="ui-btn-right ui-icon-alt ui-icon-nodisc">
+				Button
 			</a>
 		</div>
 	</div>
 	<div data-role="page" id="about">
-		<div data-theme="b" data-role="header" data-position="fixed">
+		<div data-theme="a" data-role="header" data-position="fixed">
 			<h3>UW Menu</h3>
-			<a href="#home" data-transition="flip" data-direction="reverse" class="ui-btn-right">Done</a>
+			<a href="#home" data-theme="b" data-transition="flip" data-direction="reverse" class="ui-btn-right">Done</a>
 		</div>
 		<div data-role="content">
-			<h3><a href="http://alykhan.com">Alykhan Kanji</a></h3>
+			<h3>Crafted by <a href="http://alykhan.com">Alykhan Kanji</a></h3>
 			<h5>Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
 		</div>
 	</div>
 	{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
-	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true">
+	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true" class="ui-icon-nodisc">
 		<div data-theme="b" data-role="header" data-position="fixed">
 			<h3>{{ restaurant.Name }}</h3>
 		</div>
