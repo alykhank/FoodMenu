@@ -19,9 +19,7 @@ def renderMenu():
 	MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 	jsonResponseFile = requests.get('http://s3.amazonaws.com/uwfoodmenu/response.txt', auth=S3Auth(ACCESS_KEY, SECRET_KEY))
 	menu = jsonResponseFile.json()['response']['data']
-
-	foodlist = menu['Restaurants'].values()
-	return render_template('index.html', menu=menu, foodlist=foodlist, nowWaterloo=nowWaterloo, currentDatetime=currentDatetime, mixpanelToken=MIXPANEL_TOKEN)
+	return render_template('index.html', menu=menu, nowWaterloo=nowWaterloo, currentDatetime=currentDatetime, mixpanelToken=MIXPANEL_TOKEN)
 
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
