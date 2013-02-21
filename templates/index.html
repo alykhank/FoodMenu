@@ -43,7 +43,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 </head>
 <body onload="mixpanel.track('Page View', {'Page Name': document.title, 'URL': window.location.href})">
 	<div data-role="page" id="home">
-		<div data-theme="a" data-role="header" data-position="fixed">
+		<div data-theme="b" data-role="header" data-position="fixed">
 			<h3>UW Menu</h3>
 		</div>
 		<div data-role="content">
@@ -85,9 +85,45 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			</div>
 		</div>
 		<div data-theme="a" data-role="footer" data-position="fixed">
-			<h3>
-				Alykhan Kanji
-			</h3>
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li>
+						<a href="#home" data-transition="none" data-theme="" data-icon="home" class="ui-btn-active ui-state-persist">
+							Home
+						</a>
+					</li>
+					<li>
+						<a href="#about" data-transition="none" data-theme="" data-icon="info">
+							About
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div data-role="page" id="about">
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<h3>UW Menu</h3>
+		</div>
+		<div data-role="content">
+			<h3>&copy; 2013 Alykhan Kanji</h3>
+			<h5>Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
+		</div>
+		<div data-theme="a" data-role="footer" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li>
+						<a href="#home" data-transition="none" data-theme="" data-icon="home">
+							Home
+						</a>
+					</li>
+					<li>
+						<a href="#about" data-transition="none" data-theme="" data-icon="info" class="ui-btn-active ui-state-persist">
+							About
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>
