@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/")
 def renderMenu():
 	nowWaterloo = datetime.now(timezone('America/Toronto'))
-	currentDatetime = nowWaterloo.strftime('%I:%M %p on %A, %B %d, %Y')
+	currentDatetime = nowWaterloo.strftime('%I:%M %p on %a, %b %d')
 	ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 	SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 	MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
