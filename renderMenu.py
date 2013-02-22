@@ -1,24 +1,21 @@
 #!/usr/bin/env python
 import json, os, requests
 from awsauth import S3Auth
-from datetime import datetime, timedelta
+from datetime import datetime
 from pytz import timezone
-
 from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
 @app.route("/")
 def renderMenu():
-	menu = None
-	waterlooTimezone = timezone('America/Toronto')
-	nowWaterloo = datetime.now(waterlooTimezone)
+	nowWaterloo = datetime.now(timezone('America/Toronto'))
 	currentDatetime = nowWaterloo.strftime('%I:%M %p on %A, %B %d, %Y')
 	ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 	SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 	MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
-	jsonResponseFile = requests.get('http://s3.amazonaws.com/uwfoodmenu/response.txt', auth=S3Auth(ACCESS_KEY, SECRET_KEY))
-	menu = jsonResponseFile.json()['response']['data']
+	r = requests.get('http://s3.amazonaws.com/uwfoodmenu/multi.txt', auth=S3Auth(ACCESS_KEY, SECRET_KEY))
+	menu = r.json()['response']['data']
 	return render_template('index.html', menu=menu, nowWaterloo=nowWaterloo, currentDatetime=currentDatetime, mixpanelToken=MIXPANEL_TOKEN)
 
 if __name__ == "__main__":
