@@ -1,19 +1,14 @@
 #!/usr/bin/env python
-
 import json, os, requests
 from awsauth import S3Auth
 
 key = os.environ.get('UWOPENDATA_APIKEY')
-
 service = 'FoodMenu'
-# output = 'json'
-# callback = 'None'
-request = 'http://api.uwaterloo.ca/public/v1/'
 
 def getMenu():
-	url = request + '?' + 'key=' + key + '&' + 'service=' + service
-	r = requests.get(url).text
-	return r
+	payload = {'key': key, 'service': service}
+	r = requests.get('http://api.uwaterloo.ca/public/v1/', params=payload)
+	return r.text
 
 menu = getMenu()
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
