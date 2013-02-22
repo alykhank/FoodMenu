@@ -86,7 +86,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				{% endif %}
 				{% for day in days if day in restaurant.Menu %}
 				<li data-role="list-divider">{{ day }}</li>
-					{% set meals = ['Breakfast', 'Lunch', 'Dinner'] %}
+					{% set meals = ['Breakfast', 'Lunch', 'Dinner', 'Special'] %}
 					{% for meal in meals if meal in restaurant.Menu[day] %}
 					<li>
 						{{ meal }}:
