@@ -8,6 +8,14 @@
 	<meta name="apple-mobile-web-app-title" content="UW Menu">
 	<title>UW Menu</title>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
+	<style type="text/css">
+		.info {
+			text-align: center;
+		}
+		.link {
+			text-decoration: none;
+		}
+	</style>
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
 	<!-- iPhone -->
@@ -47,7 +55,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<h3>UW Menu</h3>
 		</div><!-- header -->
 		<div data-role="content">
-			<h4 style="text-align:center">It is currently {{ currentDatetime }}. This menu is valid from {{ menu['Start'][:-5].replace('-',' ') }} to {{ menu['End'][:-5].replace('-',' ') }}.</h4>
+			<h4 class="info">It is currently {{ currentDatetime }}. This menu is valid from {{ menu['Start'][:-5].replace('-',' ') }} to {{ menu['End'][:-5].replace('-',' ') }}.</h4>
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
 			{% set isInfoPresent = False %}
 			{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
@@ -57,7 +65,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			</ul>
 			{% if not isInfoPresent %}
 				<br/>
-				<h2 style="text-align:center">No data has been provided for the current period.</h2>
+				<h2 class="info">No data has been provided for the current period.</h2>
 			{% endif %}
 		</div><!-- content -->
 		<div data-theme="c" data-role="footer" data-position="fixed">
@@ -71,8 +79,9 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<a href="#Home" data-theme="b" data-transition="flip" data-direction="reverse" class="ui-btn-right">Done</a>
 		</div><!-- header -->
 		<div data-role="content">
-			<h3>Crafted by <a href="http://alykhan.com">Alykhan Kanji</a></h3>
-			<h5>Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
+			<h3 class="info">Crafted by <a href="http://alykhan.com" class="link">Alykhan Kanji</a></h3>
+			<br/><br/><br/><br/>
+			<h5 class="info">Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
 		</div><!-- content -->
 	</div><!-- page -->
 	{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
