@@ -52,7 +52,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 </head>
 <body onload="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">
 	<div data-role="page" id="Home">
-		<div data-theme="b" data-role="header" data-position="fixed">
+		<div data-theme="b" data-role="header" data-position="fixed" data-id="appheader" data-disable-page-zoom="true" data-tap-toggle="false">
 			<h3>UW Menu</h3>
 		</div><!-- header -->
 		<div data-role="content">
@@ -66,13 +66,13 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			{% endfor %}
 			</ul>
 		</div><!-- content -->
-		<div data-theme="c" data-role="footer" data-position="fixed">
+		<div data-theme="c" data-role="footer" data-position="fixed" data-tap-toggle="false">
 			<h3>Created by Alykhan Kanji</h3>
 			<a data-role="button" data-transition="flip" href="#About" data-inline="true" data-icon="info" data-iconpos="notext" data-iconshadow="false" class="ui-btn-right ui-icon-alt ui-icon-nodisc" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})"></a>
 		</div><!-- footer -->
 	</div><!-- page -->
 	<div data-role="page" id="About">
-		<div data-theme="b" data-role="header" data-position="fixed">
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true"  data-tap-toggle="false">
 			<h3>About</h3>
 			<a href="#Home" data-theme="b" data-transition="flip" data-direction="reverse" class="ui-btn-right">Done</a>
 		</div><!-- header -->
@@ -83,7 +83,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 	</div><!-- page -->
 	{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
 	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true">
-		<div data-theme="b" data-role="header" data-position="fixed">
+		<div data-theme="b" data-role="header" data-position="fixed" data-id="appheader" data-disable-page-zoom="true" data-tap-toggle="false">
 			<h3>{{ restaurant.Name }}</h3>
 		</div><!-- header -->
 		<div data-role="content">
