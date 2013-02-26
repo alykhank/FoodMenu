@@ -52,7 +52,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 </head>
 <body onload="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">
 	<div data-role="page" id="Home">
-		<div data-theme="b" data-role="header" data-position="fixed" data-id="appheader" data-disable-page-zoom="true" data-tap-toggle="false">
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 			<h3>UW Menu</h3>
 		</div><!-- header -->
 		<div data-role="content">
@@ -83,7 +83,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 	</div><!-- page -->
 	{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
 	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true">
-		<div data-theme="b" data-role="header" data-position="fixed" data-id="appheader" data-disable-page-zoom="true" data-tap-toggle="false">
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 			<h3>{{ restaurant.Name }}</h3>
 		</div><!-- header -->
 		<div data-role="content">
