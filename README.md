@@ -1,4 +1,4 @@
-# UW Menu
+# [UW Menu](http://uwmenu.alykhan.com)
 
 * Displays lists of meals at each on-campus servery, formatted for mobile devices with jQuery Mobile
 * Retrieves UW Menu JSON data using Python with cron-style scheduler via official API
