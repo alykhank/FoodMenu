@@ -91,11 +91,6 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true">
 				{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
-				{% set currentDay = nowWaterloo.weekday() %}
-				{# If Monday-Friday, only display menu for current and next day #}
-				{% if currentDay <= 4 %}
-					{% set days = days[currentDay:currentDay+2] %}
-				{% endif %}
 				{% for day in days if day in restaurant.Menu %}
 				<li data-role="list-divider">{{ day }}</li>
 					{% set meals = ['Breakfast', 'Lunch', 'Dinner', 'Special'] %}
