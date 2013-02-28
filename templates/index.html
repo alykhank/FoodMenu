@@ -16,9 +16,6 @@
 		.link {
 			text-decoration: none;
 		}
-		.badge {
-			float: right;
-		}
 	</style>
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
@@ -84,8 +81,6 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<h3 class="info">This is an open source application. You should view the code on GitHub <a href="https://github.com/alykhank/FoodMenu" class="link">here</a>.</h3>
 			<h5 class="info">Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
 			<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
-			<br /><br />
-			<a href="http://mixpanel.com/f/partner" class="badge"><img src="http://mixpanel.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" /></a>
 		</div><!-- content -->
 	</div><!-- page -->
 	{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
