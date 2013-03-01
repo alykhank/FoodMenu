@@ -1,17 +1,13 @@
-#! /usr/bin/python
-
-import json
-jsonResponseFile = open('response.txt', 'r')
-menu = json.load(jsonResponseFile)
-data = menu['response']['data']
-
-days = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
+#!/usr/bin/env python
+import json, os, requests
+from awsauth import S3Auth
 
 def displayMenu(restaurant, foodlist):
 	if foodlist and 'Menu' in foodlist:
 		print(restaurant + ':')
 		print
 		print
+		days = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
 		for day in days:
 			if day in foodlist['Menu'].keys():
 				print('    ' + day + ':')
@@ -26,11 +22,15 @@ def displayMenu(restaurant, foodlist):
 					print
 				print
 
-print
-print('This menu is valid from ' + data['Start'] + ' to ' + data['End'] + '.')
-print
-print
-# print json.dumps(data, indent=1)
-
-for restaurant, foodlist in data['Restaurants'].iteritems():
-	displayMenu(restaurant, foodlist)
+if __name__ == "__main__":
+	ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+	SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+	r = requests.get('http://s3.amazonaws.com/uwfoodmenu/response.txt', auth=S3Auth(ACCESS_KEY, SECRET_KEY))
+	menu = r.json()['response']['data']
+	for restaurant, foodlist in menu['Restaurants'].iteritems():
+		displayMenu(restaurant, foodlist)
+	print
+	print('This menu is valid from ' + menu['Start'] + ' to ' + menu['End'] + '.')
+	print
+	print
+	# print json.dumps(menu, indent=4)
