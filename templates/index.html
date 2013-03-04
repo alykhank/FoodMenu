@@ -96,16 +96,14 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				<li data-role="list-divider">{{ day }}</li>
 					{% set meals = ['Breakfast', 'Lunch', 'Dinner', 'Special'] %}
 					{% for meal in meals if meal in restaurant.Menu[day] %}
-					<li data-role="list-divider" data-theme="c">{{ meal }}</li>
-					<li>
+						<li data-role="list-divider" data-theme="d">{{ meal }}</li>
 						{% if restaurant.Menu[day][meal].Items.result is string %}
-						<h3>{{ restaurant.Menu[day][meal].Items.result }}</h3>
+						<li>{{ restaurant.Menu[day][meal].Items.result }}</li>
 						{% else %}
 						{% for item in restaurant.Menu[day][meal].Items.result %}
-						<h3>{{ item }}</h3>
+						<li>{{ item }}</li>
 						{% endfor %}
 						{% endif %}
-					</li>
 					{% endfor %}
 				{% endfor %}
 			</ul><!-- listview -->
