@@ -65,6 +65,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				<li>No data has been provided for the current period.</li>
 			{% endfor %}
 			</ul>
+			<a data-role="button" data-transition="slide" href="#Locations" data-icon="grid" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Locations &amp; Hours</a>
 		</div><!-- content -->
 		<div data-theme="c" data-role="footer">
 			<h3>Created by Alykhan Kanji</h3>
@@ -110,6 +111,41 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 					{% endfor %}
 				{% endfor %}
 			</ul><!-- listview -->
+		</div><!-- content -->
+	</div><!-- page -->
+	{% endfor %}
+	<div data-role="page" id="Locations" data-add-back-btn="true">
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+			<h3>Locations</h3>
+		</div><!-- header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+			{% for restaurant in info.result %}
+				<li data-iconshadow="false">
+					<a href="#loc{{ restaurant.ID }}" data-transition="slide">
+						<img src="{{ restaurant.Logo }}">
+						<h2>{{ restaurant.Name|safe }}</h2>
+						<p>{{ restaurant.Location }}</p>
+					</a>
+				</li>
+			{% endfor %}
+			</ul>
+		</div><!-- content -->
+	</div><!-- page -->
+	{% for restaurant in info.result %}
+	<div data-role="page" id="loc{{ restaurant.ID }}" data-add-back-btn="true">
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+			<h3>{{ restaurant.Name|safe }}</h3>
+		</div><!-- header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+				<li data-role="list-divider">Location</li>
+				<li>{{ restaurant.Location }}</li>
+				<li data-role="list-divider">Hours</li>
+				{% for item in restaurant.Hours.result %}
+				<li>{{ item }}</li>
+				{% endfor %}
+			</ul>
 		</div><!-- content -->
 	</div><!-- page -->
 	{% endfor %}
