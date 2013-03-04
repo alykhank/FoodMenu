@@ -58,8 +58,8 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 		<div data-role="content">
 			<h4 class="info">Weekly menus for the University of Waterloo's on-campus eateries.</h4>
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
-				<li data-role="list-divider">{{ menu['Start'][:-5].replace('-',' ') }} &ndash; {{ menu['End'][:-5].replace('-',' ') }}</li>
-			{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
+				<li data-role="list-divider">{{ menu.Start[:-5].replace('-',' ') }} &ndash; {{ menu.End[:-5].replace('-',' ') }}</li>
+			{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
 				<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.Name}}'})"><a href="#{{ restaurant.Name }}" data-transition="slide">{{ restaurant.Name }}</a></li>
 			{% else %}
 				<li>No data has been provided for the current period.</li>
@@ -84,7 +84,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
 		</div><!-- content -->
 	</div><!-- page -->
-	{% for restaurant in menu['Restaurants'].values() if 'Menu' in restaurant %}
+	{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
 	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 			<h3>{{ restaurant.Name }}</h3>
