@@ -11,7 +11,7 @@ def getData(service):
 	r = requests.get('http://api.uwaterloo.ca/public/v1/', params=payload)
 	return r
 
-menu = getData('FoodMenu').text
-requests.put('http://s3.amazonaws.com/uwfoodmenu/response.txt', data=menu, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
+foodMenu = getData('FoodMenu').text
+requests.put('http://s3.amazonaws.com/uwfoodmenu/foodMenu.txt', data=foodMenu, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
 serviceInfo = getData('FoodServices').text
 requests.put('http://s3.amazonaws.com/uwfoodmenu/serviceInfo.txt', data=serviceInfo, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
