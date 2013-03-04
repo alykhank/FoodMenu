@@ -122,7 +122,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				<li data-iconshadow="false">
 					<a href="#loc{{ restaurant.ID }}" data-transition="slide">
 						<img src="{{ restaurant.Logo }}">
-						<h2>{{ restaurant.Name|safe }}</h2>
+						<h2>{{ restaurant.Name|safe|e }}</h2>
 						<p>{{ restaurant.Location }}</p>
 					</a>
 				</li>
@@ -133,7 +133,7 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 	{% for restaurant in info.result %}
 	<div data-role="page" id="loc{{ restaurant.ID }}" data-add-back-btn="true">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h3>{{ restaurant.Name|safe }}</h3>
+			<h3>{{ restaurant.Name|safe|e }}</h3>
 		</div><!-- header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
