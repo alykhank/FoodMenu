@@ -138,9 +138,13 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				<li data-role="list-divider">Location</li>
 				<li>{{ restaurant.Location }}</li>
 				<li data-role="list-divider">Hours</li>
+				{% if restaurant.Hours.result is string %}
+				<li>{{ restaurant.Hours.result }}</li>
+				{% else %}
 				{% for item in restaurant.Hours.result %}
 				<li>{{ item }}</li>
 				{% endfor %}
+				{% endif %}
 			</ul>
 		</div><!-- content -->
 	</div><!-- page -->
