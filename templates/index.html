@@ -65,17 +65,26 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				<li>No data has been provided for the current period.</li>
 			{% endfor %}
 			</ul>
-			<a data-role="button" data-transition="slide" href="#Locations" data-icon="grid" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Locations &amp; Hours</a>
 		</div><!-- content -->
-		<div data-theme="c" data-role="footer">
-			<h3>Created by Alykhan Kanji</h3>
-			<a data-role="button" data-transition="flip" href="#About" data-inline="true" data-icon="info" data-iconpos="notext" data-iconshadow="false" class="ui-btn-right ui-icon-alt ui-icon-nodisc" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})"></a>
+		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+					</li>
+					<li>
+						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+					</li>
+					<li>
+						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+					</li>
+				</ul>
+			</div>
 		</div><!-- footer -->
 	</div><!-- page -->
 	<div data-role="page" id="About">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true"  data-tap-toggle="false">
 			<h3>About</h3>
-			<a href="#Home" data-theme="b" data-transition="flip" data-direction="reverse" class="ui-btn-right">Done</a>
 		</div><!-- header -->
 		<div data-role="content">
 			<h3 class="info">Created by <a href="http://alykhan.com" class="link">Alykhan Kanji</a>.</h3>
@@ -83,6 +92,21 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<h5 class="info">Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
 			<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
 		</div><!-- content -->
+		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+					</li>
+					<li>
+						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+					</li>
+					<li>
+						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- footer -->
 	</div><!-- page -->
 	{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
 	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true">
@@ -108,9 +132,24 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				{% endfor %}
 			</ul><!-- listview -->
 		</div><!-- content -->
+		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+					</li>
+					<li>
+						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+					</li>
+					<li>
+						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- footer -->
 	</div><!-- page -->
 	{% endfor %}
-	<div data-role="page" id="Locations" data-add-back-btn="true">
+	<div data-role="page" id="Locations">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 			<h3>Locations</h3>
 		</div><!-- header -->
@@ -127,6 +166,21 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			{% endfor %}
 			</ul>
 		</div><!-- content -->
+		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+					</li>
+					<li>
+						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+					</li>
+					<li>
+						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- footer -->
 	</div><!-- page -->
 	{% for restaurant in info.result %}
 	<div data-role="page" id="loc{{ restaurant.ID }}" data-add-back-btn="true">
@@ -147,6 +201,21 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				{% endif %}
 			</ul>
 		</div><!-- content -->
+		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+					</li>
+					<li>
+						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+					</li>
+					<li>
+						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- footer -->
 	</div><!-- page -->
 	{% endfor %}
 </body>
