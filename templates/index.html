@@ -193,10 +193,30 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 				<li>{{ restaurant.Location }}</li>
 				<li data-role="list-divider">Hours</li>
 				{% if restaurant.Hours.result is string %}
-				<li>{{ restaurant.Hours.result }}</li>
+					{% if 'REOPEN' in restaurant.Hours.result %}
+					<li data-theme="e">{{ restaurant.Hours.result.replace('REOPEN','Reopens') }}</li>
+					{% elif 'Reopen' in restaurant.Hours.result %}
+					<li data-theme="e">{{ restaurant.Hours.result.replace('Reopen','Reopens') }}</li>
+					{% elif 'OPEN' in restaurant.Hours.result %}
+					<li>{{ restaurant.Hours.result.replace('OPEN','Open') }}</li>
+					{% elif 'CLOSED' in restaurant.Hours.result %}
+					<li data-theme="a">{{ restaurant.Hours.result.replace('CLOSED','Closed') }}</li>
+					{% else %}
+					<li>{{ restaurant.Hours.result }}</li>
+					{% endif %}
 				{% else %}
 				{% for item in restaurant.Hours.result %}
-				<li>{{ item }}</li>
+					{% if 'REOPEN' in item %}
+					<li data-theme="e">{{ item.replace('REOPEN','Reopens') }}</li>
+					{% elif 'Reopen' in item %}
+					<li data-theme="e">{{ item.replace('Reopen','Reopens') }}</li>
+					{% elif 'OPEN' in item %}
+					<li>{{ item.replace('OPEN','Open') }}</li>
+					{% elif 'CLOSED' in item %}
+					<li data-theme="a">{{ item.replace('CLOSED','Closed') }}</li>
+					{% else %}
+					<li>{{ item }}</li>
+					{% endif %}
 				{% endfor %}
 				{% endif %}
 			</ul>
