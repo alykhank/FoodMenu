@@ -2,6 +2,7 @@ Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
 distribute==0.6.31
+newrelic==1.10.2.38
 pytz==2012j
 requests==1.1.0
 requests-aws==0.1.2
