@@ -2,7 +2,7 @@
 {% block content %}
 	<div data-role="page" id="Menu">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h1 class="title">UW Menu</h1>
+			<h1 class="title title-fixed">UW Menu</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<h4 class="info">Weekly menus for the University of Waterloo's on-campus eateries.</h4>
@@ -19,7 +19,7 @@
 	</div><!-- page -->
 	<div data-role="page" id="About">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h1 class="title">About</h1>
+			<h1 class="title title-fixed">About</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<h4 class="info">Created by <a href="http://alykhan.com" class="link">Alykhan Kanji</a>.</h4>
@@ -32,7 +32,7 @@
 	{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
 	<div data-role="page" id="{{ restaurant.Name }}">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-iconshadow="false" href="#Home" class="ui-btn-left ui-icon-nodisc"></a>
+			<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Menu" class="ui-btn-left ui-icon-nodisc">Back</a>
 			<h1 class="title">{{ restaurant.Name }}</h1>
 		</div><!-- header -->
 		<div data-role="content">
@@ -59,7 +59,7 @@
 	{% endfor %}
 	<div data-role="page" id="Locations">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h1 class="title">Locations</h1>
+			<h1 class="title title-fixed">Locations</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
@@ -79,7 +79,7 @@
 	{% for restaurant in info.result %}
 	<div data-role="page" id="loc{{ restaurant.ID }}">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-iconshadow="false" href="#Home" class="ui-btn-left ui-icon-nodisc"></a>
+			<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
 			<h1 class="title">{{ restaurant.Name|safe|e }}</h1>
 		</div><!-- header -->
 		<div data-role="content">

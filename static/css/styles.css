@@ -6,18 +6,17 @@
 		url('/static/fonts/nevis.ttf') format('truetype'), /* Safari, Android, iOS */
 		url('/static/fonts/nevis.svg#Nevis') format('svg'); /* Legacy iOS */
 }
-.title, .navlink {
+
+.title-fixed, .navlink {
 	font-family: Nevis, Helvetica, Arial, sans-serif;
-}
-.title {
+	font-weight: lighter;
 	text-transform: uppercase;
 }
-.navlink {
-	font-variant: small-caps;
-}
+
 .info {
 	text-align: center;
 }
+
 .link {
 	text-decoration: none;
 }
