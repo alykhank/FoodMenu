@@ -3,13 +3,15 @@
 		<h1 class="title title-fixed">Locations</h1>
 	</div><!-- header -->
 	<div data-role="content">
-		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+		<ul data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Search locations&hellip;" class="ui-icon-alt ui-icon-nodisc">
 		{% for restaurant in locations.result %}
 			<li data-iconshadow="false">
 				<a href="#loc{{ restaurant.ID }}" data-transition="slidefade">
-					<img src="{{ restaurant.Logo }}">
+					<!-- <img src="{{ restaurant.Logo }}"> -->
 					<h2>{{ restaurant.Name|safe|e }}</h2>
+					{% if restaurant.Location %}
 					<p>{{ restaurant.Location }}</p>
+					{% endif %}
 				</a>
 			</li>
 		{% endfor %}

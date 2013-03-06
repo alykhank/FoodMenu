@@ -5,7 +5,11 @@
 		<h1 class="title">{{ restaurant.Name }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
-		<ul data-role="listview" data-inset="true">
+		<ul data-role="listview" data-inset="false">
+			<li data-theme="b">
+				<h2>{{ restaurant.Name }}</h2>
+				<p>{{ restaurant.Start[:-5].replace('-',' ') }} &ndash; {{ restaurant.End[:-5].replace('-',' ') }}</p>
+			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in days if day in restaurant.Menu %}
 			<li data-role="list-divider">{{ day }}</li>

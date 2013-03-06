@@ -5,36 +5,24 @@
 		<h1 class="title">{{ restaurant.Name|safe|e }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
-		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
-			<li data-role="list-divider">Location</li>
-			<li>{{ restaurant.Location }}</li>
-			<li data-role="list-divider">Hours</li>
-			{% if restaurant.Hours.result is string %}
-				{% if 'REOPEN' in restaurant.Hours.result %}
-				<li data-theme="e">{{ restaurant.Hours.result.replace('REOPEN','Reopens') }}</li>
-				{% elif 'Reopen' in restaurant.Hours.result %}
-				<li data-theme="e">{{ restaurant.Hours.result.replace('Reopen','Reopens') }}</li>
-				{% elif 'OPEN' in restaurant.Hours.result %}
-				<li>{{ restaurant.Hours.result.replace('OPEN','Open') }}</li>
-				{% elif 'CLOSED' in restaurant.Hours.result %}
-				<li data-theme="a">{{ restaurant.Hours.result.replace('CLOSED','Closed') }}</li>
+		<ul data-role="listview" data-inset="false">
+			<li data-theme="b">
+				{% if restaurant.Location %}
+				<h2>{{ restaurant.Name|safe|e }}</h2>
+				<p>{{ restaurant.Location }}</p>
 				{% else %}
-				<li>{{ restaurant.Hours.result }}</li>
+				{{ restaurant.Name|safe|e }}
 				{% endif %}
-			{% else %}
-			{% for item in restaurant.Hours.result %}
-				{% if 'REOPEN' in item %}
-				<li data-theme="e">{{ item.replace('REOPEN','Reopens') }}</li>
-				{% elif 'Reopen' in item %}
-				<li data-theme="e">{{ item.replace('Reopen','Reopens') }}</li>
-				{% elif 'OPEN' in item %}
-				<li>{{ item.replace('OPEN','Open') }}</li>
-				{% elif 'CLOSED' in item %}
-				<li data-theme="a">{{ item.replace('CLOSED','Closed') }}</li>
+			</li>
+			{% if restaurant.Hours.result %}
+				<li data-role="list-divider">Hours</li>
+				{% if restaurant.Hours.result is string %}
+					<li>{{ restaurant.Hours.result }}</li>
 				{% else %}
-				<li>{{ item }}</li>
+				{% for item in restaurant.Hours.result %}
+					<li>{{ item }}</li>
+				{% endfor %}
 				{% endif %}
-			{% endfor %}
 			{% endif %}
 		</ul>
 	</div><!-- content -->
