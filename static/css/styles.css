@@ -1,0 +1,23 @@
+@font-face {
+	font-family: Nevis;
+	src: url('/static/fonts/nevis.eot'); /* IE9 Compat Modes */
+	src: url('/static/fonts/nevis.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		url('/static/fonts/nevis.woff') format('woff'), /* Modern Browsers */
+		url('/static/fonts/nevis.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('/static/fonts/nevis.svg#Nevis') format('svg'); /* Legacy iOS */
+}
+.title, .navlink {
+	font-family: Nevis, Helvetica, Arial, sans-serif;
+}
+.title {
+	text-transform: uppercase;
+}
+.navlink {
+	font-variant: small-caps;
+}
+.info {
+	text-align: center;
+}
+.link {
+	text-decoration: none;
+}

@@ -9,14 +9,7 @@
 	<meta name="apple-mobile-web-app-title" content="UW Menu">
 	<title>UW Menu</title>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
-	<style type="text/css">
-		.info {
-			text-align: center;
-		}
-		.link {
-			text-decoration: none;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}" />
 	<link rel="apple-touch-icon-precomposed" type="image/png" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" />
 	<!-- iPhone -->
@@ -50,17 +43,17 @@ typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var
 e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
 mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 </head>
-<body onload="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">
-	<div data-role="page" id="Home">
+<body onload="mixpanel.track('Page View', {'Page Name': 'Menu', 'URL': window.location.href})">
+	<div data-role="page" id="Menu">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h3>UW Menu</h3>
+			<h1 class="title">Menu</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<h4 class="info">Weekly menus for the University of Waterloo's on-campus eateries.</h4>
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
 				<li data-role="list-divider">{{ menu.Start[:-5].replace('-',' ') }} &ndash; {{ menu.End[:-5].replace('-',' ') }}</li>
 			{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
-				<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.Name}}'})"><a href="#{{ restaurant.Name }}" data-transition="slide">{{ restaurant.Name }}</a></li>
+				<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.Name}}'})"><a href="#{{ restaurant.Name }}" data-transition="slidefade">{{ restaurant.Name }}</a></li>
 			{% else %}
 				<li>No data has been provided for the current period.</li>
 			{% endfor %}
@@ -70,25 +63,25 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<div data-role="navbar">
 				<ul>
 					<li>
-						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
 					</li>
 					<li>
-						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
 					</li>
 					<li>
-						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+						<a href="#About" data-transition="fade" class="navlink">About</a>
 					</li>
 				</ul>
 			</div>
 		</div><!-- footer -->
 	</div><!-- page -->
 	<div data-role="page" id="About">
-		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true"  data-tap-toggle="false">
-			<h3>About</h3>
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+			<h1 class="title">About</h1>
 		</div><!-- header -->
 		<div data-role="content">
-			<h3 class="info">Created by <a href="http://alykhan.com" class="link">Alykhan Kanji</a>.</h3>
-			<h3 class="info">This is an open source application. You should view the code on GitHub <a href="https://github.com/alykhank/FoodMenu" class="link">here</a>.</h3>
+			<h4 class="info">Created by <a href="http://alykhan.com" class="link">Alykhan Kanji</a>.</h4>
+			<h4 class="info">This is an open source application. You should view the code on GitHub <a href="https://github.com/alykhank/FoodMenu" class="link">here</a>.</h4>
 			<h5 class="info">Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
 			<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
 		</div><!-- content -->
@@ -96,22 +89,23 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<div data-role="navbar">
 				<ul>
 					<li>
-						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
 					</li>
 					<li>
-						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
 					</li>
 					<li>
-						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+						<a href="#About" data-transition="fade" class="navlink">About</a>
 					</li>
 				</ul>
 			</div>
 		</div><!-- footer -->
 	</div><!-- page -->
 	{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
-	<div data-role="page" id="{{ restaurant.Name }}" data-add-back-btn="true">
+	<div data-role="page" id="{{ restaurant.Name }}">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h3>{{ restaurant.Name }}</h3>
+			<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-iconshadow="false" href="#Home" class="ui-btn-left ui-icon-nodisc"></a>
+			<h1 class="title">{{ restaurant.Name }}</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true">
@@ -136,13 +130,13 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<div data-role="navbar">
 				<ul>
 					<li>
-						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
 					</li>
 					<li>
-						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
 					</li>
 					<li>
-						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+						<a href="#About" data-transition="fade" class="navlink">About</a>
 					</li>
 				</ul>
 			</div>
@@ -151,13 +145,13 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 	{% endfor %}
 	<div data-role="page" id="Locations">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h3>Locations</h3>
+			<h1 class="title">Locations</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
 			{% for restaurant in info.result %}
 				<li data-iconshadow="false">
-					<a href="#loc{{ restaurant.ID }}" data-transition="slide">
+					<a href="#loc{{ restaurant.ID }}" data-transition="slidefade">
 						<img src="{{ restaurant.Logo }}">
 						<h2>{{ restaurant.Name|safe|e }}</h2>
 						<p>{{ restaurant.Location }}</p>
@@ -170,22 +164,23 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<div data-role="navbar">
 				<ul>
 					<li>
-						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
 					</li>
 					<li>
-						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
 					</li>
 					<li>
-						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+						<a href="#About" data-transition="fade" class="navlink">About</a>
 					</li>
 				</ul>
 			</div>
 		</div><!-- footer -->
 	</div><!-- page -->
 	{% for restaurant in info.result %}
-	<div data-role="page" id="loc{{ restaurant.ID }}" data-add-back-btn="true">
+	<div data-role="page" id="loc{{ restaurant.ID }}">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h3>{{ restaurant.Name|safe|e }}</h3>
+			<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-iconshadow="false" href="#Home" class="ui-btn-left ui-icon-nodisc"></a>
+			<h1 class="title">{{ restaurant.Name|safe|e }}</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
@@ -225,13 +220,13 @@ mixpanel.init("{{mixpanelToken}}");</script><!-- end Mixpanel -->
 			<div data-role="navbar">
 				<ul>
 					<li>
-						<a href="#Home" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Home</a>
+						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
 					</li>
 					<li>
-						<a href="#Locations" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
+						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
 					</li>
 					<li>
-						<a href="#About" data-transition="fade" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
+						<a href="#About" data-transition="fade" class="navlink">About</a>
 					</li>
 				</ul>
 			</div>
