@@ -4,7 +4,7 @@
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
-		{% for restaurant in info.result %}
+		{% for restaurant in locations.result %}
 			<li data-iconshadow="false">
 				<a href="#loc{{ restaurant.ID }}" data-transition="slidefade">
 					<img src="{{ restaurant.Logo }}">
