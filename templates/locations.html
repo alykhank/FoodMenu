@@ -1,0 +1,19 @@
+<div data-role="page" id="Locations">
+	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+		<h1 class="title title-fixed">Locations</h1>
+	</div><!-- header -->
+	<div data-role="content">
+		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+		{% for restaurant in info.result %}
+			<li data-iconshadow="false">
+				<a href="#loc{{ restaurant.ID }}" data-transition="slidefade">
+					<img src="{{ restaurant.Logo }}">
+					<h2>{{ restaurant.Name|safe|e }}</h2>
+					<p>{{ restaurant.Location }}</p>
+				</a>
+			</li>
+		{% endfor %}
+		</ul>
+	</div><!-- content -->
+	{% include 'footer.html' %}
+</div><!-- page -->

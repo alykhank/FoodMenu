@@ -1,0 +1,43 @@
+{% for restaurant in info.result %}
+<div data-role="page" id="loc{{ restaurant.ID }}">
+	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
+		<h1 class="title">{{ restaurant.Name|safe|e }}</h1>
+	</div><!-- header -->
+	<div data-role="content">
+		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+			<li data-role="list-divider">Location</li>
+			<li>{{ restaurant.Location }}</li>
+			<li data-role="list-divider">Hours</li>
+			{% if restaurant.Hours.result is string %}
+				{% if 'REOPEN' in restaurant.Hours.result %}
+				<li data-theme="e">{{ restaurant.Hours.result.replace('REOPEN','Reopens') }}</li>
+				{% elif 'Reopen' in restaurant.Hours.result %}
+				<li data-theme="e">{{ restaurant.Hours.result.replace('Reopen','Reopens') }}</li>
+				{% elif 'OPEN' in restaurant.Hours.result %}
+				<li>{{ restaurant.Hours.result.replace('OPEN','Open') }}</li>
+				{% elif 'CLOSED' in restaurant.Hours.result %}
+				<li data-theme="a">{{ restaurant.Hours.result.replace('CLOSED','Closed') }}</li>
+				{% else %}
+				<li>{{ restaurant.Hours.result }}</li>
+				{% endif %}
+			{% else %}
+			{% for item in restaurant.Hours.result %}
+				{% if 'REOPEN' in item %}
+				<li data-theme="e">{{ item.replace('REOPEN','Reopens') }}</li>
+				{% elif 'Reopen' in item %}
+				<li data-theme="e">{{ item.replace('Reopen','Reopens') }}</li>
+				{% elif 'OPEN' in item %}
+				<li>{{ item.replace('OPEN','Open') }}</li>
+				{% elif 'CLOSED' in item %}
+				<li data-theme="a">{{ item.replace('CLOSED','Closed') }}</li>
+				{% else %}
+				<li>{{ item }}</li>
+				{% endif %}
+			{% endfor %}
+			{% endif %}
+		</ul>
+	</div><!-- content -->
+	{% include 'footer.html' %}
+</div><!-- page -->
+{% endfor %}
