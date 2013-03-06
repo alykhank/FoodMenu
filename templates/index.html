@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
 	<div data-role="page" id="Menu">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-			<h1 class="title">Menu</h1>
+			<h1 class="title">UW Menu</h1>
 		</div><!-- header -->
 		<div data-role="content">
 			<h4 class="info">Weekly menus for the University of Waterloo's on-campus eateries.</h4>
@@ -15,21 +15,7 @@
 			{% endfor %}
 			</ul>
 		</div><!-- content -->
-		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar">
-				<ul>
-					<li>
-						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
-					</li>
-					<li>
-						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
-					</li>
-					<li>
-						<a href="#About" data-transition="fade" class="navlink">About</a>
-					</li>
-				</ul>
-			</div>
-		</div><!-- footer -->
+		{% include 'footer.html' %}
 	</div><!-- page -->
 	<div data-role="page" id="About">
 		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
@@ -41,21 +27,7 @@
 			<h5 class="info">Contains information provided by the University of Waterloo under license on an 'as is' basis.</h5>
 			<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
 		</div><!-- content -->
-		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar">
-				<ul>
-					<li>
-						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
-					</li>
-					<li>
-						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
-					</li>
-					<li>
-						<a href="#About" data-transition="fade" class="navlink">About</a>
-					</li>
-				</ul>
-			</div>
-		</div><!-- footer -->
+		{% include 'footer.html' %}
 	</div><!-- page -->
 	{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
 	<div data-role="page" id="{{ restaurant.Name }}">
@@ -82,21 +54,7 @@
 				{% endfor %}
 			</ul><!-- listview -->
 		</div><!-- content -->
-		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar">
-				<ul>
-					<li>
-						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
-					</li>
-					<li>
-						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
-					</li>
-					<li>
-						<a href="#About" data-transition="fade" class="navlink">About</a>
-					</li>
-				</ul>
-			</div>
-		</div><!-- footer -->
+		{% include 'footer.html' %}
 	</div><!-- page -->
 	{% endfor %}
 	<div data-role="page" id="Locations">
@@ -116,21 +74,7 @@
 			{% endfor %}
 			</ul>
 		</div><!-- content -->
-		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar">
-				<ul>
-					<li>
-						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
-					</li>
-					<li>
-						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
-					</li>
-					<li>
-						<a href="#About" data-transition="fade" class="navlink">About</a>
-					</li>
-				</ul>
-			</div>
-		</div><!-- footer -->
+		{% include 'footer.html' %}
 	</div><!-- page -->
 	{% for restaurant in info.result %}
 	<div data-role="page" id="loc{{ restaurant.ID }}">
@@ -172,21 +116,7 @@
 				{% endif %}
 			</ul>
 		</div><!-- content -->
-		<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
-			<div data-role="navbar">
-				<ul>
-					<li>
-						<a href="#Menu" data-transition="fade" class="navlink">Menu</a>
-					</li>
-					<li>
-						<a href="#Locations" data-transition="fade" class="navlink">Locations</a>
-					</li>
-					<li>
-						<a href="#About" data-transition="fade" class="navlink">About</a>
-					</li>
-				</ul>
-			</div>
-		</div><!-- footer -->
+		{% include 'footer.html' %}
 	</div><!-- page -->
 	{% endfor %}
 {% endblock content %}
