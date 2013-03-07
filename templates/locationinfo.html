@@ -7,7 +7,7 @@
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="b">
-				<img src="static/img/logos/{{restaurant.ID}}.png">
+				<img src="static/img/logos/{{restaurant.ID}}.png" alt="{{ restaurant.Name|safe|e }}">
 				{% if restaurant.Location %}
 				<h2>{{ restaurant.Name|safe|e }}</h2>
 				<p>{{ restaurant.Location }}</p>
