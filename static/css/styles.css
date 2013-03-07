@@ -25,6 +25,11 @@
 	font-size: medium;
 }
 
+#description {
+	font-family: Nevis, Helvetica, Arial, sans-serif;
+	font-weight: lighter;
+}
+
 #disclaimer {
 	font-size: x-small;
 }

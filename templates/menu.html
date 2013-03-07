@@ -3,7 +3,7 @@
 		<h1 class="title title-fixed">UW Menu</h1>
 	</div><!-- header -->
 	<div data-role="content">
-		<h2 id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</h2>
+		<p id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</p>
 		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
 			<li data-role="list-divider">{{ menu.Start[:-5].replace('-',' ') }} &ndash; {{ menu.End[:-5].replace('-',' ') }}</li>
 		{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
