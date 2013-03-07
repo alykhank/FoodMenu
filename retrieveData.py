@@ -13,5 +13,5 @@ def getData(service):
 
 foodMenu = getData('FoodMenu').text
 requests.put('http://s3.amazonaws.com/uwfoodmenu/foodMenu.txt', data=foodMenu, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
-serviceInfo = getData('FoodServices').text
-requests.put('http://s3.amazonaws.com/uwfoodmenu/serviceInfo.txt', data=serviceInfo, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
+# serviceInfo = getData('FoodServices').text
+# requests.put('http://s3.amazonaws.com/uwfoodmenu/serviceInfo.txt', data=serviceInfo, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
