@@ -7,7 +7,7 @@
 		{% for restaurant in locations.result %}
 			<li data-iconshadow="false" onclick="mixpanel.track('Location View', {'ID': '{{restaurant.ID}}', 'Name': '{{restaurant.Name|safe|e}}', 'Location': '{{restaurant.Location}}'})">
 				<a href="#loc{{ restaurant.ID }}" data-transition="slidefade">
-					<!-- <img src="{{ restaurant.Logo }}"> -->
+					<img src="static/img/logos/{{restaurant.ID}}.png">
 					<h2>{{ restaurant.Name|safe|e }}</h2>
 					{% if restaurant.Location %}
 					<p>{{ restaurant.Location }}</p>
