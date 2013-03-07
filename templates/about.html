@@ -9,5 +9,6 @@
 		<br>
 		<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
 	</div><!-- content -->
-	{% include 'footer.html' %}
+	{% import 'footer.html' as footer %}
+	{{ footer.setFooter('About') }}
 </div><!-- page -->

@@ -13,5 +13,6 @@
 		{% endfor %}
 		</ul>
 	</div><!-- content -->
-	{% include 'footer.html' %}
+	{% import 'footer.html' as footer %}
+	{{ footer.setFooter('Menu') }}
 </div><!-- page -->

@@ -1,15 +1,18 @@
-<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
-	<div data-role="navbar">
-		<ul>
-			<li>
-				<a href="#Menu" data-transition="fade" class="navlink" onclick="mixpanel.track('Page View', {'Page Name': 'Home', 'URL': window.location.href})">Menu</a>
-			</li>
-			<li>
-				<a href="#Locations" data-transition="fade" class="navlink" onclick="mixpanel.track('Page View', {'Page Name': 'Locations', 'URL': window.location.href})">Locations</a>
-			</li>
-			<li>
-				<a href="#About" data-transition="fade" class="navlink" onclick="mixpanel.track('Page View', {'Page Name': 'About', 'URL': window.location.href})">About</a>
-			</li>
-		</ul>
-	</div>
-</div><!-- footer -->
+{% macro setFooter(active_page) %}
+	{% set pages = [
+		('Menu', 'Home'),
+		('Locations', 'Locations'),
+		('About', 'About'),
+	] %}
+	<div data-theme="a" data-role="footer" data-id="navigation" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
+			<ul>
+				{% for page, mixpanelPage in pages %}
+				<li>
+				<a href="#{{page}}" data-transition="fade" class="navlink{% if page == active_page %} ui-btn-active ui-state-persist{% endif %}" onclick="mixpanel.track('Page View', {'Page Name': '{{mixpanelPage}}', 'URL': window.location.href})">{{page}}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div><!-- footer -->
+{% endmacro %}
