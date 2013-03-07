@@ -5,7 +5,7 @@
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Search locations&hellip;" class="ui-icon-alt ui-icon-nodisc">
 		{% for restaurant in locations.result %}
-			<li data-iconshadow="false">
+			<li data-iconshadow="false" onclick="mixpanel.track('Location View', {'ID': '{{restaurant.ID}}', 'Name': '{{restaurant.Name|safe|e}}', 'Location': '{{restaurant.Location}}'})">
 				<a href="#loc{{ restaurant.ID }}" data-transition="slidefade">
 					<!-- <img src="{{ restaurant.Logo }}"> -->
 					<h2>{{ restaurant.Name|safe|e }}</h2>
