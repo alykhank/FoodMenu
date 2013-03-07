@@ -20,3 +20,11 @@
 .link {
 	text-decoration: none;
 }
+
+.creator, .github {
+	font-size: medium;
+}
+
+.disclaimer {
+	font-size: x-small;
+}
