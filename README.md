@@ -22,4 +22,4 @@
 * Store [UW Open Data API Key](http://api.uwaterloo.ca/#!/keygen) and database URL in `.env`
 	* [Local setup instructions](https://devcenter.heroku.com/articles/config-vars#local-setup)
 	* Use `foreman run python retrieveData.py` to request data and store in database
-* Use `foreman start` to run application locally and access at http://localhost:5000/
+* Use `foreman start` to run application locally and access at [http://localhost:5000/](http://localhost:5000/)
