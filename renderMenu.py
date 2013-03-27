@@ -20,8 +20,16 @@ class FoodMenu(db.Model):
 	def __repr__(self):
 		return self.result
 
-ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
-SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+class FoodServices(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	result = db.Column(db.Text)
+
+	def __init__(self, result):
+		self.result = result
+
+	def __repr__(self):
+		return self.result
+
 MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 
 @app.route('/')
@@ -29,8 +37,8 @@ def renderMenu():
 	nowWaterloo = datetime.now(timezone('America/Toronto'))
 	foodMenu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
 	menu = json.loads(foodMenu)['response']['data']
-	serviceInfo = requests.get('http://s3.amazonaws.com/uwfoodmenu/serviceInfo.txt', auth=S3Auth(ACCESS_KEY, SECRET_KEY))
-	locations = serviceInfo.json()['response']['data']
+	serviceInfo = FoodServices.query.order_by(FoodServices.id.desc()).first().result
+	locations = json.loads(serviceInfo)['response']['data']
 	return render_template('index.html', menu=menu, locations=locations, nowWaterloo=nowWaterloo, mixpanelToken=MIXPANEL_TOKEN)
 
 if __name__ == "__main__":
