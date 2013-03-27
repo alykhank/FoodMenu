@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json, os, requests
 from awsauth import S3Auth
+from renderMenu import db, FoodMenu
 
 key = os.environ.get('UWOPENDATA_APIKEY')
 ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -12,6 +13,8 @@ def getData(service):
 	return r
 
 foodMenu = getData('FoodMenu').text
-requests.put('http://s3.amazonaws.com/uwfoodmenu/foodMenu.txt', data=foodMenu, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
+foodMenuData = FoodMenu(foodMenu)
 # serviceInfo = getData('FoodServices').text
 # requests.put('http://s3.amazonaws.com/uwfoodmenu/serviceInfo.txt', data=serviceInfo, auth=S3Auth(ACCESS_KEY, SECRET_KEY))
+db.session.add(foodMenuData)
+db.session.commit()
