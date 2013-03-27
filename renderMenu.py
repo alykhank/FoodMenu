@@ -4,31 +4,7 @@ from awsauth import S3Auth
 from datetime import datetime
 from pytz import timezone
 from flask import Flask, render_template, url_for
-from flask.ext.sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-db = SQLAlchemy(app)
-
-class FoodMenu(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	result = db.Column(db.Text)
-
-	def __init__(self, result):
-		self.result = result
-
-	def __repr__(self):
-		return self.result
-
-class FoodServices(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	result = db.Column(db.Text)
-
-	def __init__(self, result):
-		self.result = result
-
-	def __repr__(self):
-		return self.result
+from models import app, db, FoodMenu, FoodServices
 
 MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 

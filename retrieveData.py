@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import json, os, requests
 from awsauth import S3Auth
-from renderMenu import db, FoodMenu, FoodServices
+from models import db, FoodMenu, FoodServices
 
 key = os.environ.get('UWOPENDATA_APIKEY')
 
