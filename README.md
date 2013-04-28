@@ -7,6 +7,10 @@
 * Displays meals for the week at each on-campus eatery
 * Presents information including location and hours for each eatery
 
+![Menu](img/menu.png) ![Menu Info](img/menuinfo.png)
+![Locations](img/locations.png)![Location Info](img/locationinfo.png)
+![About](img/about.png)
+
 
 ## Technologies
 
