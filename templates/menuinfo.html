@@ -1,28 +1,23 @@
-{% for restaurant in menu.Restaurants.values() if 'Menu' in restaurant %}
-<div data-role="page" id="{{ restaurant.Name }}">
+{% for restaurant in menu.outlets if 'menu' in restaurant %}
+<div data-role="page" id="r{{ restaurant.outlet_id }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Menu" class="ui-btn-left ui-icon-nodisc">Back</a>
-		<h1 class="title">{{ restaurant.Name }}</h1>
+		<h1 class="title">{{ restaurant.outlet_name }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="b">
-				<h2>{{ restaurant.Name }}</h2>
-				<p>{{ restaurant.Start[:-5].replace('-',' ') }} &ndash; {{ restaurant.End[:-5].replace('-',' ') }}</p>
+				<h2>{{ restaurant.outlet_name }}</h2>
 			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
-			{% for day in days if day in restaurant.Menu %}
-			<li data-role="list-divider">{{ day }}</li>
-				{% set meals = ['Breakfast', 'Lunch', 'Dinner', 'Special'] %}
-				{% for meal in meals if meal in restaurant.Menu[day] %}
-					<li data-role="list-divider" data-theme="d">{{ meal }}</li>
-					{% if restaurant.Menu[day][meal].Items.result is string %}
-					<li>{{ restaurant.Menu[day][meal].Items.result }}</li>
-					{% else %}
-					{% for item in restaurant.Menu[day][meal].Items.result %}
-					<li>{{ item }}</li>
+			{% for day in restaurant.menu %}
+			<li data-role="list-divider">{{ day.day }}</li>
+				{% set meals = ['breakfast', 'lunch', 'dinner'] %}
+				{% for meal in meals if meal in day.meals.keys() and day.meals[meal] %}
+					<li data-role="list-divider" data-theme="d">{{ meal|capitalize }}</li>
+					{% for item in day.meals[meal] %}
+					<li>{{ item.product_name }}</li>
 					{% endfor %}
-					{% endif %}
 				{% endfor %}
 			{% endfor %}
 		</ul><!-- listview -->
