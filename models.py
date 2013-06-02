@@ -15,7 +15,7 @@ class FoodMenu(db.Model):
 		self.result = result
 
 	def __repr__(self):
-		return self.result
+		return "<FoodMenu('%s')>" % (self.result)
 
 class FoodServices(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -25,4 +25,4 @@ class FoodServices(db.Model):
 		self.result = result
 
 	def __repr__(self):
-		return self.result
+		return "<FoodServices('%s')>" % (self.result)
