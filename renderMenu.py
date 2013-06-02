@@ -11,7 +11,7 @@ MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 def renderMenu():
 	nowWaterloo = datetime.now(timezone('America/Toronto'))
 	foodMenu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
-	menu = json.loads(foodMenu)['response']['data']
+	menu = json.loads(foodMenu)['data']
 	serviceInfo = FoodServices.query.order_by(FoodServices.id.desc()).first().result
 	locations = json.loads(serviceInfo)['response']['data']
 	return render_template('index.html', menu=menu, locations=locations, nowWaterloo=nowWaterloo, mixpanelToken=MIXPANEL_TOKEN)
@@ -19,7 +19,7 @@ def renderMenu():
 @app.route('/foodmenu')
 def foodmenu():
 	foodMenu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
-	menu = json.loads(foodMenu)['response']['data']
+	menu = json.loads(foodMenu)['data']
 	return jsonify(menu)
 
 @app.route('/foodservices')
