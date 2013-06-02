@@ -10,6 +10,7 @@
 			<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})"><a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">{{ restaurant.outlet_name }}</a></li>
 		{% else %}
 			<li>No data has been provided for the current period.</li>
+			<li><a href="https://uwaterloo.ca/food-services/sites/ca.food-services/files/uploads/files/June%202013.pdf">June Hours of Operation</a></li>
 		{% endfor %}
 		</ul>
 	</div><!-- content -->
