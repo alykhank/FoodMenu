@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import json, os, requests
-from awsauth import S3Auth
 from datetime import datetime
 from pytz import timezone
 from flask import Flask, render_template, url_for, jsonify

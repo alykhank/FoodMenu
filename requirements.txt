@@ -8,5 +8,4 @@ newrelic==1.10.2.38
 psycopg2==2.4.6
 pytz==2012j
 requests==1.1.0
-requests-aws==0.1.2
 wsgiref==0.1.2
