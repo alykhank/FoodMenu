@@ -9,7 +9,13 @@ def getData(service):
 	r = requests.get('http://api.uwaterloo.ca/public/v1/', params=payload)
 	return r
 
-foodMenu = getData('FoodMenu').text
+def retrieve():
+	payload = {'key': key}
+	url = os.environ.get('API_URL')
+	r = requests.get(url, params=payload)
+	return r
+
+foodMenu = retrieve().text
 foodMenuData = FoodMenu(foodMenu)
 serviceInfo = getData('FoodServices').text
 serviceInfoData = FoodServices(serviceInfo)
