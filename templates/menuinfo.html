@@ -16,7 +16,7 @@
 				{% for meal in meals if meal in day.meals.keys() and day.meals[meal] %}
 					<li data-role="list-divider" data-theme="d">{{ meal|capitalize }}</li>
 					{% for item in day.meals[meal] %}
-					<li>{{ item.product_name }}</li>
+					<li>{{ item.product_name }}{% if item.diet_type %}<br><br><p>{{ item.diet_type }}</p>{% endif %}</li>
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}
