@@ -11,7 +11,7 @@
 			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in restaurant.menu %}
-			<li data-role="list-divider">{{ day.day }}</li>
+				<li data-role="list-divider">{{ day.day }}</li>
 				{% set meals = ['breakfast', 'lunch', 'dinner'] %}
 				{% for meal in meals if meal in day.meals.keys() and day.meals[meal] %}
 					<li data-role="list-divider" data-theme="d">{{ meal|capitalize }}</li>
@@ -19,6 +19,9 @@
 					<li>{{ item.product_name }}{% if item.diet_type %}<br><br><p>{{ item.diet_type }}</p>{% endif %}</li>
 					{% endfor %}
 				{% endfor %}
+				{% if day.notes %}
+					<li data-role="list-divider" data-theme="d">Notes: {{ day.notes }}</li>
+				{% endif %}
 			{% endfor %}
 		</ul><!-- listview -->
 	</div><!-- content -->
