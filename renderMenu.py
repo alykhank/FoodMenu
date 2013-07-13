@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import json, os, requests
-from datetime import datetime
+from datetime import datetime, date
 from pytz import timezone
 from flask import Flask, render_template, url_for, jsonify
 from models import app, db, FoodMenu, FoodServices
@@ -28,7 +28,12 @@ def foodservices():
 	locations = json.loads(serviceInfo)['response']['data']
 	return jsonify(locations)
 
+def datetimeformat(value, format='%B %d'):
+	currentDate = date(int(value[:4]), int(value[5:7]), int(value[8:]))
+	return currentDate.strftime(format)
+
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
 	port = int(os.environ.get('PORT', 5000))
+	app.jinja_env.filters['datetimeformat'] = datetimeformat
 	app.run(host='0.0.0.0', port=port)
