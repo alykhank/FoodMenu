@@ -26,3 +26,13 @@ class FoodServices(db.Model):
 
 	def __repr__(self):
 		return "<FoodServices('%s')>" % (self.result)
+
+class Outlets(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	result = db.Column(db.Text)
+
+	def __init__(self, result):
+		self.result = result
+
+	def __repr__(self):
+		return "<Outlets('%s')>" % (self.result)
