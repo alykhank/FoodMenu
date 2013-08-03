@@ -1,29 +1,27 @@
-{% for restaurant in locations.result %}
-<div data-role="page" id="loc{{ restaurant.ID }}">
+{% for outlet in outlets %}
+<div data-role="page" id="loc{{ outlet.outlet_id }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
-		<h1 class="title">{{ restaurant.Name|safe|e }}</h1>
+		<h1 class="title">{{ outlet.outlet_name }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="b">
-				<img src="static/img/logos/{{restaurant.ID}}.png" alt="{{ restaurant.Name|safe|e }}">
-				{% if restaurant.Location %}
-				<h2>{{ restaurant.Name|safe|e }}</h2>
-				<p>{{ restaurant.Location }}</p>
-				{% else %}
-				{{ restaurant.Name|safe|e }}
+				<!-- <img src="static/img/logos/{{outlet.outlet_id}}.png" alt="{{ outlet.outlet_name }}"> -->
+				<h2>{{ outlet.outlet_name }}</h2>
+				{% if outlet.outlet_location %}
+				<p>{{ outlet.outlet_location }}</p>
 				{% endif %}
 			</li>
-			{% if restaurant.Hours.result %}
-				<li data-role="list-divider">Hours</li>
-				{% if restaurant.Hours.result is string %}
-					<li>{{ restaurant.Hours.result }}</li>
-				{% else %}
-				{% for item in restaurant.Hours.result %}
-					<li>{{ item }}</li>
-				{% endfor %}
-				{% endif %}
+			<li data-role="list-divider">Available Meals:</li>
+			{% if outlet.has_breakfast %}
+				<li>Breakfast</li>
+			{% endif %}
+			{% if outlet.has_lunch %}
+				<li>Lunch</li>
+			{% endif %}
+			{% if outlet.has_dinner %}
+				<li>Dinner</li>
 			{% endif %}
 		</ul>
 	</div><!-- content -->
