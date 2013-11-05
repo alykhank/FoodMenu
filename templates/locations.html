@@ -4,13 +4,15 @@
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Search locations&hellip;" class="ui-icon-alt ui-icon-nodisc">
-		{% for outlet in outlets %}
-			<li data-iconshadow="false" onclick="mixpanel.track('Location View', {'ID': '{{outlet.outlet_id}}', 'Name': '{{outlet.outlet_name}}', 'Location': '{{outlet.outlet_location}}'})">
-				<a href="#loc{{ outlet.outlet_id }}" data-transition="slidefade">
-					<!-- <img src="static/img/logos/{{outlet.outlet_id}}.png" alt="{{ outlet.outlet_name }}"> -->
-					<h2>{{ outlet.outlet_name }}</h2>
-					{% if outlet.outlet_location %}
-					<p>{{ outlet.outlet_location }}</p>
+		{% for location in locations %}
+			<li data-iconshadow="false" onclick="mixpanel.track('Location View', {'ID': '{{location.outlet_id}}', 'Name': '{{location.name}}'})">
+				<a href="#loc{{ location.outlet_id }}" data-transition="slidefade">
+					<!-- <img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.name }}"> -->
+					<h2>{{ location.name }}</h2>
+					{% if location.is_open_now %}
+						<p>OPEN</p>
+					{% else %}
+						<p>CLOSED</p>
 					{% endif %}
 				</a>
 			</li>

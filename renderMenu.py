@@ -3,7 +3,7 @@ import json, os, requests
 from datetime import datetime, date
 from pytz import timezone
 from flask import Flask, render_template, url_for, jsonify
-from models import app, db, FoodMenu, FoodServices, Outlets
+from models import app, db, FoodMenu, Locations
 
 MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 
@@ -12,23 +12,15 @@ def renderMenu():
 	nowWaterloo = datetime.now(timezone('America/Toronto'))
 	foodMenu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
 	menu = json.loads(foodMenu)['data']
-	serviceInfo = FoodServices.query.order_by(FoodServices.id.desc()).first().result
-	locations = json.loads(serviceInfo)['response']['data']
-	outletsInfo = Outlets.query.order_by(Outlets.id.desc()).first().result
-	outlets = json.loads(outletsInfo)['data']
-	return render_template('index.html', menu=menu, locations=locations, outlets=outlets, nowWaterloo=nowWaterloo, mixpanelToken=MIXPANEL_TOKEN)
+	locationsInfo = Locations.query.order_by(Locations.id.desc()).first().result
+	locations = json.loads(locationsInfo)['data']
+	return render_template('index.html', menu=menu, locations=locations, nowWaterloo=nowWaterloo, mixpanelToken=MIXPANEL_TOKEN)
 
 @app.route('/foodmenu')
 def foodmenu():
 	foodMenu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
 	menu = json.loads(foodMenu)['data']
 	return jsonify(menu)
-
-@app.route('/foodservices')
-def foodservices():
-	serviceInfo = FoodServices.query.order_by(FoodServices.id.desc()).first().result
-	locations = json.loads(serviceInfo)['response']['data']
-	return jsonify(locations)
 
 def datetimeformat(value, format='%B %d'):
 	currentDate = date(int(value[:4]), int(value[5:7]), int(value[8:]))

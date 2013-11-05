@@ -17,7 +17,7 @@ class FoodMenu(db.Model):
 	def __repr__(self):
 		return "<FoodMenu('%s')>" % (self.result)
 
-class FoodServices(db.Model):
+class Locations(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	result = db.Column(db.Text)
 
@@ -25,14 +25,4 @@ class FoodServices(db.Model):
 		self.result = result
 
 	def __repr__(self):
-		return "<FoodServices('%s')>" % (self.result)
-
-class Outlets(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	result = db.Column(db.Text)
-
-	def __init__(self, result):
-		self.result = result
-
-	def __repr__(self):
-		return "<Outlets('%s')>" % (self.result)
+		return "<Locations('%s')>" % (self.result)

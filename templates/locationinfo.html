@@ -1,27 +1,44 @@
-{% for outlet in outlets %}
-<div data-role="page" id="loc{{ outlet.outlet_id }}">
+{% for location in locations %}
+<div data-role="page" id="loc{{ location.outlet_id }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
-		<h1 class="title">{{ outlet.outlet_name }}</h1>
+		<h1 class="title">{{ location.name }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="b">
-				<!-- <img src="static/img/logos/{{outlet.outlet_id}}.png" alt="{{ outlet.outlet_name }}"> -->
-				<h2>{{ outlet.outlet_name }}</h2>
-				{% if outlet.outlet_location %}
-				<p>{{ outlet.outlet_location }}</p>
+				<!-- <img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.name }}"> -->
+				<h2>{{ location.name }}</h2>
+				{% if location.latitude and location.longitude%}
+				<p>{{ location.latitude }}, {{ location.longitude }}</p>
+				{% endif %}
+				{% if location.is_open_now %}
+					<p>OPEN</p>
+				{% else %}
+					<p>CLOSED</p>
 				{% endif %}
 			</li>
-			<li data-role="list-divider">Available Meals:</li>
-			{% if outlet.has_breakfast %}
-				<li>Breakfast</li>
+			{% if location.description %}
+				<li data-role="list-divider">Description:</li>
+				<li>{{ location.description|safe }}</li>
 			{% endif %}
-			{% if outlet.has_lunch %}
-				<li>Lunch</li>
+			{% if location.notice %}
+				<li data-role="list-divider">Notices:</li>
+				<li>{{ location.notice }}</li>
 			{% endif %}
-			{% if outlet.has_dinner %}
-				<li>Dinner</li>
+			{% if location.opening_hours %}
+				<li data-role="list-divider">Hours:</li>
+				{% set days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] %}
+				{% for day in days %}
+					{% if day in location.opening_hours.keys() %}
+						<li data-role="list-divider" data-theme="d">{{ day|capitalize }}:</li>
+						{% if location.opening_hours[day].is_closed %}
+							<li>CLOSED</li>
+						{% else %}
+							<li>{{ location.opening_hours[day].opening_hour }} &ndash; {{ location.opening_hours[day].closing_hour }}</li>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
 			{% endif %}
 		</ul>
 	</div><!-- content -->

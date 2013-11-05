@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 import json, os, requests
-from models import db, FoodMenu, FoodServices, Outlets
+from models import db, FoodMenu, Locations
 
 key = os.environ.get('UWOPENDATA_APIKEY')
-
-def getData(service):
-	payload = {'key': key, 'service': service}
-	r = requests.get('http://api.uwaterloo.ca/public/v1/', params=payload)
-	return r
 
 def retrieve(service):
 	payload = {'key': key}
@@ -17,11 +12,8 @@ def retrieve(service):
 
 foodMenu = retrieve('menu.json').text
 foodMenuData = FoodMenu(foodMenu)
-serviceInfo = getData('FoodServices').text
-serviceInfoData = FoodServices(serviceInfo)
-outlets = retrieve('outlets.json').text
-outletsData = Outlets(outlets)
+locations = retrieve('locations.json').text
+locationsData = Locations(locations)
 db.session.add(foodMenuData)
-db.session.add(serviceInfoData)
-db.session.add(outletsData)
+db.session.add(locationsData)
 db.session.commit()
