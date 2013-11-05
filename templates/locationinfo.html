@@ -28,7 +28,7 @@
 			{% endif %}
 			{% if location.opening_hours %}
 				<li data-role="list-divider">Hours:</li>
-				{% set days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] %}
+				{% set days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
 				{% for day in days %}
 					{% if day in location.opening_hours.keys() %}
 						<li data-role="list-divider" data-theme="d">{{ day|capitalize }}:</li>
