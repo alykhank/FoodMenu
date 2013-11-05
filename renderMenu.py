@@ -22,9 +22,9 @@ def foodmenu():
 	menu = json.loads(foodMenu)['data']
 	return jsonify(menu)
 
-def datetimeformat(value, format='%B %d'):
-	currentDate = date(int(value[:4]), int(value[5:7]), int(value[8:]))
-	return currentDate.strftime(format)
+def datetimeformat(value, FULL_DATE_FORMAT='%Y-%m-%d', MONTH_DAY_FORMAT='%B %d'):
+	valueDate = datetime.strptime(value, FULL_DATE_FORMAT)
+	return valueDate.strftime(MONTH_DAY_FORMAT)
 
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
