@@ -9,14 +9,7 @@
 			<li data-theme="b">
 				<!-- <img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.name }}"> -->
 				<h2>{{ location.name }}</h2>
-				{% if location.latitude and location.longitude%}
-				<p>{{ location.latitude }}, {{ location.longitude }}</p>
-				{% endif %}
-				{% if location.is_open_now %}
-					<p>OPEN</p>
-				{% else %}
-					<p>CLOSED</p>
-				{% endif %}
+				<p>{{ location.building }} &ndash; {{ location.latitude }}, {{ location.longitude }}</p>
 			</li>
 			{% if location.description %}
 				<li data-role="list-divider">Description:</li>
