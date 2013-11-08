@@ -5,9 +5,11 @@
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Search locations&hellip;" class="ui-icon-alt ui-icon-nodisc">
 		{% for location in locations %}
-		<li data-iconshadow="false" onclick="mixpanel.track('Location View', {'ID': '{{location.outlet_id}}', 'Name': '{{location.outlet_name}}', 'Location': '{{location.building}}'})">
-				<a href="#loc{{ location.outlet_id }}" data-transition="slidefade">
-					<!-- <img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.outlet_name }}"> -->
+		{% set fallbackID = 100 + loop.index %}
+		{% set outlet_id = location.outlet_id | default(fallbackID, boolean=True) %}
+		<li data-iconshadow="false" onclick="mixpanel.track('Location View', {'ID': '{{outlet_id}}', 'Name': '{{location.outlet_name}}', 'Location': '{{location.building}}'})">
+				<a href="#loc{{ outlet_id }}" data-transition="slidefade">
+					<!-- <img src="static/img/logos/{{outlet_id}}.png" alt="{{ location.outlet_name }}"> -->
 					<h2>{{ location.outlet_name }}</h2>
 					<p>{{ location.building }} &ndash; {{ location.latitude }}, {{ location.longitude }}</p>
 				</a>
