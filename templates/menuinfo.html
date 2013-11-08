@@ -9,6 +9,7 @@
 			<li data-theme="b">
 				<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
 				<h2>{{ restaurant.outlet_name }}</h2>
+				<p>{{ restaurant.outlet_id|building_info(locations) }}</p>
 			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in restaurant.menu %}

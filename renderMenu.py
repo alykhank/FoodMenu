@@ -26,8 +26,14 @@ def datetimeformat(value, FULL_DATE_FORMAT='%Y-%m-%d', MONTH_DAY_FORMAT='%B %d')
 	valueDate = datetime.strptime(value, FULL_DATE_FORMAT)
 	return valueDate.strftime(MONTH_DAY_FORMAT)
 
+def building_info(outlet_id, locations):
+	for location in locations:
+		if location['outlet_id'] == outlet_id:
+			return '%s - %s, %s' % (location['building'], location['latitude'], location['longitude'])
+
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
 	port = int(os.environ.get('PORT', 5000))
 	app.jinja_env.filters['datetimeformat'] = datetimeformat
+	app.jinja_env.filters['building_info'] = building_info
 	app.run(host='0.0.0.0', port=port)
