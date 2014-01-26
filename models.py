@@ -26,3 +26,40 @@ class Locations(db.Model):
 
 	def __repr__(self):
 		return "<Locations('%s')>" % (self.result)
+
+class Response(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	date = db.Column(db.DateTime)
+	week = db.Column(db.Integer)
+	year = db.Column(db.Integer)
+	start = db.Column(db.DateTime)
+	end = db.Column(db.DateTime)
+	outlets = db.relationship('Outlet', backref='response')
+
+class Outlet(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	outlet_number = db.Column(db.Integer)
+	outlet_name = db.Column(db.Text)
+	menu = db.relationship('Menu', backref='outlet')
+	response_id = db.Column(db.Integer, db.ForeignKey('response.id'))
+
+class Menu(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	date = db.Column(db.DateTime)
+	day = db.Column(db.String(10))
+	meals = db.relationship('Meals', uselist=False, backref='menu')
+	notes = db.Column(db.Text)
+	outlet_id = db.Column(db.Integer, db.ForeignKey('outlet.id'))
+
+class Meals(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	lunch = db.relationship('Product')
+	dinner = db.relationship('Product')
+	menu_id = db.Column(db.Integer, db.ForeignKey('menu.id'))
+
+class Product(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	product_number = db.Column(db.Integer)
+	product_name = db.Column(db.String(80))
+	diet_type = db.Column(db.String(20))
+	meals_id = db.Column(db.Integer, db.ForeignKey('meals.id'))
