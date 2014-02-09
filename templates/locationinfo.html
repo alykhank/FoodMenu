@@ -1,7 +1,5 @@
 {% for location in locations %}
-{% set fallbackID = 100 + loop.index %}
-{% set outlet_id = location.outlet_id | default(fallbackID, boolean=True) %}
-<div data-role="page" id="loc{{ outlet_id }}">
+<div data-role="page" id="loc{{ location.outlet_id }}{{ location.building }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
 		<h1 class="title">{{ location.outlet_name }}</h1>
@@ -9,7 +7,7 @@
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="b">
-				<img src="static/img/logos/{{outlet_id}}.png" alt="{{ location.outlet_name }}">
+				<img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.outlet_name }}">
 				<h2>{{ location.outlet_name }}</h2>
 				<p>{{ location.building }} &ndash; {{ location.latitude }}, {{ location.longitude }}</p>
 			</li>
