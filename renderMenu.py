@@ -29,7 +29,7 @@ def datetimeformat(value, FULL_DATE_FORMAT='%Y-%m-%d', MONTH_DAY_FORMAT='%B %d')
 def building_info(outlet_id, locations):
 	for location in locations:
 		if location['outlet_id'] == outlet_id:
-			return '%s - %s, %s' % (location['building'], location['latitude'], location['longitude'])
+			return '%s' % location['building']
 
 if __name__ == "__main__":
 	# Bind to PORT if defined, otherwise default to 5000.
