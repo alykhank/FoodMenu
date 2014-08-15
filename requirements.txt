@@ -3,8 +3,7 @@ Flask-SQLAlchemy==0.16
 Jinja2==2.6
 SQLAlchemy==0.8.0b2
 Werkzeug==0.8.3
-distribute==0.6.31
-newrelic==1.10.2.38
+newrelic==1.13.1.31
 psycopg2==2.4.6
 pytz==2012j
 requests==1.1.0
