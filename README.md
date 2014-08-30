@@ -1,6 +1,7 @@
 # [UW Menu](http://uwmenu.alykhan.com)
 
-***
+[![Build Status](https://travis-ci.org/alykhank/FoodMenu.svg?branch=master)](https://travis-ci.org/alykhank/FoodMenu)
+[![Dependency Status](https://gemnasium.com/alykhank/FoodMenu.svg)](https://gemnasium.com/alykhank/FoodMenu)
 
 ## Features
 
