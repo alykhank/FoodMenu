@@ -63,6 +63,6 @@ class Meals(db.Model):
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_number = db.Column(db.Integer)
-    product_name = db.Column(db.String(80))
+    product_name = db.Column(db.String(100))
     diet_type = db.Column(db.String(20))
     meals_id = db.Column(db.Integer, db.ForeignKey('meals.id'))
