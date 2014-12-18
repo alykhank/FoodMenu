@@ -21,17 +21,17 @@ def retrieve(service):
     resp = requests.get(url, params=payload)
     return resp
 
-foodMenu = retrieve('menu.json').text
-foodMenuData = FoodMenu(foodMenu)
-locations = retrieve('locations.json').text
-locationsData = Locations(locations)
-db.session.add(foodMenuData)
-db.session.add(locationsData)
+FOOD_MENU = retrieve('menu.json').text
+FOOD_MENU_DATA = FoodMenu(FOOD_MENU)
+LOCATIONS = retrieve('locations.json').text
+LOCATIONS_DATA = Locations(LOCATIONS)
+db.session.add(FOOD_MENU_DATA)
+db.session.add(LOCATIONS_DATA)
 
-data = json.loads(foodMenu)['data']
-now = datetime.now(timezone('America/Toronto'))
-outlets = []
-for o in data['outlets']:
+DATA = json.loads(FOOD_MENU)['data']
+NOW = datetime.now(timezone('America/Toronto'))
+OUTLETS = []
+for o in DATA['outlets']:
     menus = []
     for m in o['menu']:
         lunch_products = []
@@ -70,16 +70,16 @@ for o in data['outlets']:
         outlet_name=o['outlet_name'],
         menu=menus
     )
-    outlets.append(outlet)
+    OUTLETS.append(outlet)
     db.session.add(outlet)
-response = Response(
-    date=now,
-    week=data['date']['week'],
-    year=data['date']['year'],
-    start=data['date']['start'],
-    end=data['date']['end'],
-    outlets=outlets
+RESPONSE = Response(
+    date=NOW,
+    week=DATA['date']['week'],
+    year=DATA['date']['year'],
+    start=DATA['date']['start'],
+    end=DATA['date']['end'],
+    outlets=OUTLETS
 )
-db.session.add(response)
+db.session.add(RESPONSE)
 
 db.session.commit()

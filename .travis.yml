@@ -1,4 +1,4 @@
 language: python
 # command to install dependencies
 install: pip install -r requirements.txt --use-mirrors
-script: true
+script: pylint createdb.py dropdb.py retrieve_data.py
