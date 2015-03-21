@@ -44,7 +44,7 @@ def menu_api():
 
 def fulldateformat(value,
                    full_date_format="%Y-%m-%d",
-                   friendly_format="{date.day}/{date.month}/{date.year}"):
+                   friendly_format="{date:%b} {date.day} {date.year}"):
     """Convert datetimes from 'Y-m-d' to 'd/m/Y'."""
     date = datetime.strptime(value, full_date_format)
     return friendly_format.format(date=date)
