@@ -14,7 +14,7 @@ from models import app, FoodMenu, Locations
 MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 
 @app.route('/')
-def render_menu():
+def index():
     """Send menu and location data to templates."""
     now_waterloo = datetime.now(timezone('America/Toronto'))
     food_menu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result

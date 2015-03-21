@@ -1,1 +1,1 @@
-web: newrelic-admin run-program python render_menu.py
+web: newrelic-admin run-program python uwmenu.py
