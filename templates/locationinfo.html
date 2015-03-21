@@ -6,10 +6,12 @@
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
-			<li data-theme="b">
-				<img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.outlet_name }}">
-				<h2>{{ location.outlet_name }}</h2>
-				<p>{{ location.building }}</p>
+			<li data-theme="d">
+				<a href="http://maps.apple.com/?q={{ location.latitude }},{{ location.longitude }}">
+					<img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.outlet_name }}">
+					<h2>{{ location.outlet_name }}</h2>
+					<p>{{ location.building }}</p>
+				</a>
 			</li>
 			{% if location.description %}
 				<li data-role="list-divider">Description:</li>
