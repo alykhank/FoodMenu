@@ -6,7 +6,6 @@ import json
 import os
 from datetime import datetime
 
-from pytz import timezone
 from flask import render_template, jsonify
 
 from models import app, FoodMenu, Locations
@@ -16,7 +15,6 @@ MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 @app.route('/')
 def index():
     """Send menu and location data to templates."""
-    now_waterloo = datetime.now(timezone('America/Toronto'))
     food_menu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
     menu = json.loads(food_menu)['data']
     locations_info = Locations.query.order_by(
@@ -25,7 +23,6 @@ def index():
     return render_template('index.html',
                            menu=menu,
                            locations=locations,
-                           nowWaterloo=now_waterloo,
                            mixpanelToken=MIXPANEL_TOKEN)
 
 @app.route('/menu')

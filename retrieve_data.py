@@ -7,7 +7,6 @@ import os
 
 import requests
 from datetime import datetime
-from pytz import timezone
 
 from models import db
 from models import FoodMenu, Locations, Response, Outlet, Menu, Meals, Product
@@ -29,7 +28,7 @@ db.session.add(FOOD_MENU_DATA)
 db.session.add(LOCATIONS_DATA)
 
 DATA = json.loads(FOOD_MENU)['data']
-NOW = datetime.now(timezone('America/Toronto'))
+NOW = datetime.now()
 OUTLETS = []
 for o in DATA['outlets']:
     menus = []
