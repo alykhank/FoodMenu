@@ -2,11 +2,11 @@
 
 """Retrieve Menu and Locations from UW Open Data API and store in DB."""
 
+from datetime import datetime
 import json
 import os
 
 import requests
-from datetime import datetime
 
 from models import db
 from models import FoodMenu, Locations, Response, Outlet, Menu, Meals, Product

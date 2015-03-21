@@ -2,13 +2,14 @@
 
 """Serve menu web view and API."""
 
+from datetime import datetime
 import json
 import os
-from datetime import datetime
 
 from flask import render_template, jsonify
 
 from models import app, FoodMenu, Locations
+from retrieve_data import retrieve
 
 MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 
@@ -20,9 +21,18 @@ def index():
     locations_info = Locations.query.order_by(
         Locations.id.desc()).first().result
     locations = json.loads(locations_info)['data']
+    outlets = json.loads(retrieve('outlets.json').text)['data']
+    meals = {}
+    for outlet in outlets:
+        daily_meals = []
+        if outlet['has_breakfast']: daily_meals += ['Breakfast']
+        if outlet['has_lunch']: daily_meals += ['Lunch']
+        if outlet['has_dinner']: daily_meals += ['Dinner']
+        meals[outlet['outlet_id']] = daily_meals
     return render_template('index.html',
                            menu=menu,
                            locations=locations,
+                           meals=meals,
                            mixpanelToken=MIXPANEL_TOKEN)
 
 @app.route('/menu')

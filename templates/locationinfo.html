@@ -10,7 +10,13 @@
 				<a href="http://maps.apple.com/?q={{ location.latitude }},{{ location.longitude }}">
 					<img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.outlet_name }}">
 					<h2>{{ location.outlet_name }}</h2>
-					<p>{{ location.building }}</p>
+					<p>
+						{% if meals[location.outlet_id] %}
+							{{ meals[location.outlet_id] | join(", ") }}
+							&mdash;
+						{% endif %}
+						{{ location.building }}
+					</p>
 				</a>
 			</li>
 			{% if location.description %}
