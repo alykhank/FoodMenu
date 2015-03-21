@@ -5,7 +5,7 @@
 	<div data-role="content">
 		<p id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</p>
 		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
-			<li data-role="list-divider">{{ menu.date.start|datetimeformat }} &ndash; {{ menu.date.end|datetimeformat }}</li>
+			<li data-role="list-divider">{{ menu.date.start | dateformat }} &ndash; {{ menu.date.end | dateformat }}</li>
 		{% for restaurant in menu.outlets if 'menu' in restaurant %}
 			<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})">
 				<a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">

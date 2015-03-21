@@ -19,16 +19,20 @@
 				<li data-role="list-divider">Notices:</li>
 				<li>{{ location.notice }}</li>
 			{% endif %}
+			{% if location.dates_closed %}
+				<li data-role="list-divider">Dates Closed:</li>
+				<li>{{ location.dates_closed | map('fulldateformat') | join(', ') }}</li>
+			{% endif %}
 			{% if location.opening_hours %}
 				<li data-role="list-divider">Hours:</li>
 				{% set days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
 				{% for day in days %}
 					{% if day in location.opening_hours.keys() %}
-						<li data-role="list-divider" data-theme="d">{{ day|capitalize }}:</li>
+						<li data-role="list-divider" data-theme="d">{{ day | capitalize }}:</li>
 						{% if location.opening_hours[day].is_closed %}
 							<li>CLOSED</li>
 						{% else %}
-							<li>{{ location.opening_hours[day].opening_hour }} &ndash; {{ location.opening_hours[day].closing_hour }}</li>
+							<li>{{ location.opening_hours[day].opening_hour | timeformat }} &ndash; {{ location.opening_hours[day].closing_hour | timeformat }}</li>
 						{% endif %}
 					{% endif %}
 				{% endfor %}
