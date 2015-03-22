@@ -9,7 +9,17 @@
 			<li data-theme="b">
 				<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
 				<h2>{{ restaurant.outlet_name }}</h2>
-				<p>{{ restaurant.outlet_id|building_info(locations) }}</p>
+				<p>
+					{% if meals[restaurant.outlet_id] %}
+						{{ meals[restaurant.outlet_id] | join(", ") }}
+					{% endif %}
+					{% if meals[restaurant.outlet_id] and restaurant.outlet_id | building_info(locations) %}
+						&mdash;
+					{% endif %}
+					{% if restaurant.outlet_id | building_info(locations) %}
+						{{ restaurant.outlet_id | building_info(locations) }}
+					{% endif %}
+				</p>
 			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in restaurant.menu %}
