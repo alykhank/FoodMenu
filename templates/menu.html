@@ -11,7 +11,11 @@
 				<a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">
 					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
 					<h2>{{ restaurant.outlet_name }}</h2>
-					<p>{{ restaurant.outlet_id|building_info(locations) }}</p>
+					<p>
+						{% if restaurant.outlet_id | building_info(locations) %}
+							{{ restaurant.outlet_id | building_info(locations) }}
+						{% endif %}
+					</p>
 				</a>
 			</li>
 		{% else %}

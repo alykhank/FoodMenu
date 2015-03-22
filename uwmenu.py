@@ -66,7 +66,7 @@ def building_info(outlet_id, locations):
     """Find building name for given outlet ID."""
     for location in locations:
         if location['outlet_id'] == outlet_id:
-            return '%s' % location['building']
+            return location['building']
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
