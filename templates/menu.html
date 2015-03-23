@@ -5,28 +5,32 @@
 	<div data-role="content">
 		<p id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</p>
 		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+		{% if menu %}
 			<li data-role="list-divider">{{ menu.date.start | dateformat }} &ndash; {{ menu.date.end | dateformat }}</li>
-		{% for restaurant in menu.outlets if 'menu' in restaurant %}
-			<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})">
-				<a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">
-					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
-					<h2>{{ restaurant.outlet_name }}</h2>
-					<p>
-						{% if meals[restaurant.outlet_id] %}
-							{{ meals[restaurant.outlet_id] | join(", ") }}
-						{% endif %}
-						{% if meals[restaurant.outlet_id] and restaurant.outlet_id | building_info(locations) %}
-							&mdash;
-						{% endif %}
-						{% if restaurant.outlet_id | building_info(locations) %}
-							{{ restaurant.outlet_id | building_info(locations) }}
-						{% endif %}
-					</p>
-				</a>
-			</li>
+			{% for restaurant in menu.outlets if 'menu' in restaurant %}
+				<li data-iconshadow="false" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})">
+					<a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">
+						<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
+						<h2>{{ restaurant.outlet_name }}</h2>
+						<p>
+							{% if meals[restaurant.outlet_id] %}
+								{{ meals[restaurant.outlet_id] | join(", ") }}
+							{% endif %}
+							{% if meals[restaurant.outlet_id] and restaurant.outlet_id | building_info(locations) %}
+								&mdash;
+							{% endif %}
+							{% if restaurant.outlet_id | building_info(locations) %}
+								{{ restaurant.outlet_id | building_info(locations) }}
+							{% endif %}
+						</p>
+					</a>
+				</li>
+			{% else %}
+				<li>No data has been provided for the current period.</li>
+			{% endfor %}
 		{% else %}
 			<li>No data has been provided for the current period.</li>
-		{% endfor %}
+		{% endif %}
 		</ul>
 	</div><!-- content -->
 	{% import 'footer.html' as footer %}

@@ -16,11 +16,10 @@ MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
 @app.route('/')
 def index():
     """Send menu and location data to templates."""
-    food_menu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
-    menu = json.loads(food_menu)['data']
-    locations_info = Locations.query.order_by(
-        Locations.id.desc()).first().result
-    locations = json.loads(locations_info)['data']
+    menu = FoodMenu.query.order_by(FoodMenu.id.desc()).first()
+    menu = json.loads(menu.result)['data'] if menu else {}
+    locations = Locations.query.order_by(Locations.id.desc()).first()
+    locations = json.loads(locations.result)['data'] if locations else {}
     outlets = json.loads(retrieve('outlets.json').text)['data']
     meals = {}
     for outlet in outlets:
