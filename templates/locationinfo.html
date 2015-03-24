@@ -17,6 +17,13 @@
 						{% endif %}
 						{{ location.building }}
 					</p>
+					<span class="ui-li-count">
+						{% if location.is_open_now %}
+						Open
+						{% else %}
+						Closed
+						{% endif %}
+					</span>
 				</a>
 			</li>
 			{% if location.description %}

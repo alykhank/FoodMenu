@@ -20,6 +20,13 @@
 						{{ restaurant.outlet_id | building_info(locations) }}
 					{% endif %}
 				</p>
+				<span class="ui-li-count">
+					{% if restaurant.outlet_id | open_state(locations) %}
+					Open
+					{% else %}
+					Closed
+					{% endif %}
+				</span>
 			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in restaurant.menu %}

@@ -17,6 +17,13 @@
 						{{ location.building }}
 					</p>
 				</a>
+				<span class="ui-li-count">
+					{% if location.is_open_now %}
+					Open
+					{% else %}
+					Closed
+					{% endif %}
+				</span>
 			</li>
 		{% endfor %}
 		</ul>

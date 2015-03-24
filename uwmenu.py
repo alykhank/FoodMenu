@@ -31,6 +31,7 @@ def attach_filters():
     app.jinja_env.filters['dateformat'] = dateformat
     app.jinja_env.filters['timeformat'] = timeformat
     app.jinja_env.filters['building_info'] = building_info
+    app.jinja_env.filters['open_state'] = open_state
 
 @app.route('/')
 def index():
@@ -82,6 +83,12 @@ def building_info(outlet_id, locations):
     for location in locations:
         if location['outlet_id'] == outlet_id:
             return location['building']
+
+def open_state(outlet_id, locations):
+    """Determine open/closed state for given outlet ID."""
+    for location in locations:
+        if location['outlet_id'] == outlet_id:
+            return location['is_open_now']
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
