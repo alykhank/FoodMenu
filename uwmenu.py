@@ -46,6 +46,7 @@ def retrieve_all_outlet_details():
                     if outlet['has_lunch']: daily_meals += ['Lunch']
                     if outlet['has_dinner']: daily_meals += ['Dinner']
                     eatery['meals'] = daily_meals
+        cache.set(AGGREGATE_MENU, json.dumps(menu), ex=60) # expire cached value after 60 seconds
     return menu
 
 def attach_filters():
