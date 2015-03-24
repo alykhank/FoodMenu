@@ -11,13 +11,11 @@
 					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
 					<h2>{{ restaurant.outlet_name }}</h2>
 					<p>
-						{% if restaurant.meals %}
+						{% set mdash = joiner("—") %}
+						{% if restaurant.meals %} {{ mdash() }}
 							{{ restaurant.meals | join(", ") }}
 						{% endif %}
-						{% if restaurant.meals and restaurant.location.building %}
-							&mdash;
-						{% endif %}
-						{% if restaurant.location.building %}
+						{% if restaurant.location.building %} {{ mdash() }}
 							{{ restaurant.location.building }}
 						{% endif %}
 					</p>

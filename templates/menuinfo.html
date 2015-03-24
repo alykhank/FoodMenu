@@ -6,27 +6,27 @@
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
-			<li data-theme="b">
-				<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
-				<h2>{{ restaurant.outlet_name }}</h2>
-				<p>
-					{% if restaurant.meals %}
-						{{ restaurant.meals | join(", ") }}
-					{% endif %}
-					{% if restaurant.meals and restaurant.location.building %}
-						&mdash;
-					{% endif %}
-					{% if restaurant.location.building %}
-						{{ restaurant.location.building }}
-					{% endif %}
-				</p>
-				<span class="ui-li-count">
-					{% if restaurant.location.is_open_now %}
-					Open
-					{% else %}
-					Closed
-					{% endif %}
-				</span>
+			<li data-theme="d">
+				<a href="http://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
+					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
+					<h2>{{ restaurant.outlet_name }}</h2>
+					<p>
+						{% set mdash = joiner("—") %}
+						{% if restaurant.meals %} {{ mdash() }}
+							{{ restaurant.meals | join(", ") }}
+						{% endif %}
+						{% if restaurant.location.building %} {{ mdash() }}
+							{{ restaurant.location.building }}
+						{% endif %}
+					</p>
+					<span class="ui-li-count">
+						{% if restaurant.location.is_open_now %}
+						Open
+						{% else %}
+						Closed
+						{% endif %}
+					</span>
+				</a>
 			</li>
 			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
 			{% for day in restaurant.menu %}
