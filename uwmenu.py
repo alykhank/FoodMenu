@@ -55,7 +55,7 @@ def index():
 @app.route('/menu')
 def menu_api():
     """Serve menu data as JSON API."""
-    menu = json.loads(retrieve('menu.json').text)['data']
+    menu = json.loads(retrieve('menu.json'))['data']
     return jsonify(menu)
 
 def fulldateformat(value,
