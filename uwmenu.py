@@ -6,20 +6,25 @@ from datetime import datetime
 import json
 import os
 
-from flask import render_template, jsonify
-
-from models import app, FoodMenu, Locations
-from retrieve_data import retrieve
+from flask import Flask, render_template, jsonify
+import requests
 
 MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
+KEY = os.environ.get('UWOPENDATA_APIKEY')
+app = Flask(__name__)
+
+def retrieve(service):
+    """Request service data from UW Open Data API as JSON HTTPResponse."""
+    payload = {'key': KEY}
+    url = os.environ.get('API_URL') + service
+    resp = requests.get(url, params=payload)
+    return resp
 
 @app.route('/')
 def index():
     """Send menu and location data to templates."""
-    menu = FoodMenu.query.order_by(FoodMenu.id.desc()).first()
-    menu = json.loads(menu.result)['data'] if menu else {}
-    locations = Locations.query.order_by(Locations.id.desc()).first()
-    locations = json.loads(locations.result)['data'] if locations else {}
+    menu = json.loads(retrieve('menu.json').text)['data']
+    locations = json.loads(retrieve('locations.json').text)['data']
     outlets = json.loads(retrieve('outlets.json').text)['data']
     meals = {}
     for outlet in outlets:
@@ -37,8 +42,7 @@ def index():
 @app.route('/menu')
 def menu_api():
     """Serve menu data as JSON API."""
-    food_menu = FoodMenu.query.order_by(FoodMenu.id.desc()).first().result
-    menu = json.loads(food_menu)['data']
+    menu = json.loads(retrieve('menu.json').text)['data']
     return jsonify(menu)
 
 def fulldateformat(value,
