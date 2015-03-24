@@ -1,9 +1,11 @@
+# Python
 *.py[cod]
+
+# Virtualenv
+venv/
+
+# Foreman
 .env
 
-#Exclude Virtualenv artifacts
-venv
-
-# Standard ignores
-*.DS_Store
-*.swp
+# Redis
+*.rdb
