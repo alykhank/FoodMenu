@@ -22,7 +22,7 @@ def retrieve(service):
         payload = {"key": KEY}
         url = "https://api.uwaterloo.ca/v2/foodservices/" + service
         resp = requests.get(url, params=payload).text
-        cache.set(service, resp, 60) # expire cached value after 60 seconds
+        cache.setex(service, resp, 60) # expire cached value after 60 seconds
     return resp
 
 def attach_filters():
@@ -30,8 +30,6 @@ def attach_filters():
     app.jinja_env.filters['fulldateformat'] = fulldateformat
     app.jinja_env.filters['dateformat'] = dateformat
     app.jinja_env.filters['timeformat'] = timeformat
-    app.jinja_env.filters['building_info'] = building_info
-    app.jinja_env.filters['open_state'] = open_state
 
 @app.route('/')
 def index():
@@ -39,18 +37,18 @@ def index():
     menu = json.loads(retrieve('menu.json'))['data']
     locations = json.loads(retrieve('locations.json'))['data']
     outlets = json.loads(retrieve('outlets.json'))['data']
-    meals = {}
-    for outlet in outlets:
-        daily_meals = []
-        if outlet['has_breakfast']: daily_meals += ['Breakfast']
-        if outlet['has_lunch']: daily_meals += ['Lunch']
-        if outlet['has_dinner']: daily_meals += ['Dinner']
-        meals[outlet['outlet_id']] = daily_meals
-    return render_template('index.html',
-                           menu=menu,
-                           locations=locations,
-                           meals=meals,
-                           mixpanelToken=MIXPANEL_TOKEN)
+    for eatery in menu['outlets']:
+        for location in locations:
+            if eatery['outlet_id'] == location['outlet_id']:
+                eatery['location'] = location
+        for outlet in outlets:
+            if eatery['outlet_id'] == outlet['outlet_id']:
+                daily_meals = []
+                if outlet['has_breakfast']: daily_meals += ['Breakfast']
+                if outlet['has_lunch']: daily_meals += ['Lunch']
+                if outlet['has_dinner']: daily_meals += ['Dinner']
+                eatery['meals'] = daily_meals
+    return render_template('index.html', menu=menu, mixpanelToken=MIXPANEL_TOKEN)
 
 @app.route('/menu')
 def menu_api():
@@ -77,18 +75,6 @@ def timeformat(value,
     """Convert datetimes from 'H:M' to 'I:M p'."""
     time = datetime.strptime(value, full_time_format)
     return friendly_format.format(time=time)
-
-def building_info(outlet_id, locations):
-    """Find building name for given outlet ID."""
-    for location in locations:
-        if location['outlet_id'] == outlet_id:
-            return location['building']
-
-def open_state(outlet_id, locations):
-    """Determine open/closed state for given outlet ID."""
-    for location in locations:
-        if location['outlet_id'] == outlet_id:
-            return location['is_open_now']
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.

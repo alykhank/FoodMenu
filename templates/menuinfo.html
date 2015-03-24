@@ -10,18 +10,18 @@
 				<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
 				<h2>{{ restaurant.outlet_name }}</h2>
 				<p>
-					{% if meals[restaurant.outlet_id] %}
-						{{ meals[restaurant.outlet_id] | join(", ") }}
+					{% if restaurant.meals %}
+						{{ restaurant.meals | join(", ") }}
 					{% endif %}
-					{% if meals[restaurant.outlet_id] and restaurant.outlet_id | building_info(locations) %}
+					{% if restaurant.meals and restaurant.location.building %}
 						&mdash;
 					{% endif %}
-					{% if restaurant.outlet_id | building_info(locations) %}
-						{{ restaurant.outlet_id | building_info(locations) }}
+					{% if restaurant.location.building %}
+						{{ restaurant.location.building }}
 					{% endif %}
 				</p>
 				<span class="ui-li-count">
-					{% if restaurant.outlet_id | open_state(locations) %}
+					{% if restaurant.location.is_open_now %}
 					Open
 					{% else %}
 					Closed

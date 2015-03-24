@@ -1,24 +1,28 @@
-{% for location in locations %}
-<div data-role="page" id="loc{{ location.outlet_id }}{{ location.building }}">
+{% for restaurant in menu.outlets %}
+<div data-role="page" id="loc{{ restaurant.outlet_id }}{{ restaurant.location.building }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
-		<h1 class="title">{{ location.outlet_name }}</h1>
+		<h1 class="title">{{ restaurant.outlet_name }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="d">
-				<a href="http://maps.apple.com/?q={{ location.latitude }},{{ location.longitude }}">
-					<img src="static/img/logos/{{location.outlet_id}}.png" alt="{{ location.outlet_name }}">
-					<h2>{{ location.outlet_name }}</h2>
+				<a href="http://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
+					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
+					<h2>{{ restaurant.outlet_name }}</h2>
 					<p>
-						{% if meals[location.outlet_id] %}
-							{{ meals[location.outlet_id] | join(", ") }}
+						{% if restaurant.meals %}
+							{{ restaurant.meals | join(", ") }}
+						{% endif %}
+						{% if restaurant.meals and restaurant.location.building %}
 							&mdash;
 						{% endif %}
-						{{ location.building }}
+						{% if restaurant.location.building %}
+							{{ restaurant.location.building }}
+						{% endif %}
 					</p>
 					<span class="ui-li-count">
-						{% if location.is_open_now %}
+						{% if restaurant.location.is_open_now %}
 						Open
 						{% else %}
 						Closed
@@ -26,28 +30,28 @@
 					</span>
 				</a>
 			</li>
-			{% if location.description %}
+			{% if restaurant.location.description %}
 				<li data-role="list-divider">Description:</li>
-				<li>{{ location.description|safe }}</li>
+				<li>{{ restaurant.location.description | safe }}</li>
 			{% endif %}
-			{% if location.notice %}
+			{% if restaurant.location.notice %}
 				<li data-role="list-divider">Notices:</li>
-				<li>{{ location.notice }}</li>
+				<li>{{ restaurant.location.notice }}</li>
 			{% endif %}
-			{% if location.dates_closed %}
+			{% if restaurant.location.dates_closed %}
 				<li data-role="list-divider">Dates Closed:</li>
-				<li>{{ location.dates_closed | map('fulldateformat') | join(', ') }}</li>
+				<li>{{ restaurant.location.dates_closed | map('fulldateformat') | join(', ') }}</li>
 			{% endif %}
-			{% if location.opening_hours %}
+			{% if restaurant.location.opening_hours %}
 				<li data-role="list-divider">Hours:</li>
 				{% set days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
 				{% for day in days %}
-					{% if day in location.opening_hours.keys() %}
+					{% if day in restaurant.location.opening_hours.keys() %}
 						<li data-role="list-divider" data-theme="d">{{ day | capitalize }}:</li>
-						{% if location.opening_hours[day].is_closed %}
+						{% if restaurant.location.opening_hours[day].is_closed %}
 							<li>CLOSED</li>
 						{% else %}
-							<li>{{ location.opening_hours[day].opening_hour | timeformat }} &ndash; {{ location.opening_hours[day].closing_hour | timeformat }}</li>
+							<li>{{ restaurant.location.opening_hours[day].opening_hour | timeformat }} &ndash; {{ restaurant.location.opening_hours[day].closing_hour | timeformat }}</li>
 						{% endif %}
 					{% endif %}
 				{% endfor %}
