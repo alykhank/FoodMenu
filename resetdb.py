@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-"""Drop all databases."""
+"""Reset database."""
 
 from models import db
 
 db.drop_all()
+db.create_all()
