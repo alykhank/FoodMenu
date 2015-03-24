@@ -4,7 +4,8 @@
 	</div><!-- header -->
 	<div data-role="content">
 		<p id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</p>
-		<ul data-role="listview" data-inset="true" class="ui-icon-alt ui-icon-nodisc">
+		<br>
+		<ul data-role="listview" data-inset="false" class="ui-icon-alt ui-icon-nodisc">
 		{% if menu %}
 			<li data-role="list-divider">{{ menu.date.start | dateformat }} &ndash; {{ menu.date.end | dateformat }}</li>
 			{% for restaurant in menu.outlets if 'menu' in restaurant %}
