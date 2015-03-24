@@ -15,10 +15,17 @@ app = Flask(__name__)
 
 def retrieve(service):
     """Request service data from UW Open Data API as JSON HTTPResponse."""
-    payload = {'key': KEY}
-    url = os.environ.get('API_URL') + service
+    payload = {"key": KEY}
+    url = "https://api.uwaterloo.ca/v2/foodservices/" + service
     resp = requests.get(url, params=payload)
     return resp
+
+def attach_filters():
+    """Attach Jinja filters to app for use in templates."""
+    app.jinja_env.filters['fulldateformat'] = fulldateformat
+    app.jinja_env.filters['dateformat'] = dateformat
+    app.jinja_env.filters['timeformat'] = timeformat
+    app.jinja_env.filters['building_info'] = building_info
 
 @app.route('/')
 def index():
@@ -75,8 +82,5 @@ if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
     PORT = int(os.environ.get('PORT', 5000))
     app.debug = os.environ.get('DEBUG')
-    app.jinja_env.filters['fulldateformat'] = fulldateformat
-    app.jinja_env.filters['dateformat'] = dateformat
-    app.jinja_env.filters['timeformat'] = timeformat
-    app.jinja_env.filters['building_info'] = building_info
+    attach_filters()
     app.run(host='0.0.0.0', port=PORT)

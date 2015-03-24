@@ -26,7 +26,6 @@
 
 * Store [UW Open Data API Key](http://api.uwaterloo.ca/#!/keygen) and database URL in `.env`
 	* `echo "UWOPENDATA_APIKEY=<KEY>" >> .env`
-	* `echo "API_URL=https://api.uwaterloo.ca/v2/foodservices/" >> .env`
 	* `echo "DATABASE_URL=postgres://<USER>@localhost/uwmenu" >> .env`
 	* [Local setup instructions](https://devcenter.heroku.com/articles/config-vars#local-setup)
 	* Use `foreman run python retrieve_data.py` to request data and store in database
