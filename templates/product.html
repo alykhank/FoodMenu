@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div data-role="page" id="Product{{ product.product_id }}">
+		<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+			<h1 class="title">{{ product.product_name }}</h1>
+			<a data-role="button" data-rel="back" class="ui-btn-right">Done</a>
+		</div><!-- header -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true">
+				{% if product.diet_type %}
+					<li data-theme="b">{{ product.diet_type }}</li>
+				{% endif %}
+				{% set text_attributes = ["serving_size", "ingredients", "micro_nutrients", "tips"] %}
+				{% for attribute in text_attributes if product[attribute] %}
+					<li data-role="list-divider" data-theme="d">{{ attribute | replace("_", " ") | title }}</li>
+					<li>{{ product[attribute] }}</li>
+				{% endfor %}
+				<li data-role="list-divider" data-theme="d">Nutrition Facts</li>
+				{% for k, v in product | dictsort if k not in special_attributes and v is not none %}
+				<li>
+					{% if "_percent" in k %}
+						{{ k | replace("_", " ") | replace(" percent", "") | title }}:
+						{{ v }}%
+					{% elif "_mg" in k %}
+						{{ k | replace("_", " ") | replace(" mg", "") | title }}:
+						{{ v }}mg
+					{% elif "_g" in k %}
+						{{ k | replace("_", " ") | replace(" g", "") | title }}:
+						{{ v }}g
+					{% else %}
+						{{ k | replace("_", " ") | title }}:
+						{{ v }}
+					{% endif %}
+				</li>
+				{% endfor %}
+			</ul><!-- listview -->
+		</div><!-- content -->
+	</div><!-- page -->
+{% endblock content %}

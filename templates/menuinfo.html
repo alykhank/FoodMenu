@@ -35,7 +35,15 @@
 				{% for meal in meals if meal in day.meals.keys() and day.meals[meal] %}
 					<li data-role="list-divider" data-theme="d">{{ meal|capitalize }}</li>
 					{% for item in day.meals[meal] %}
-					<li>{{ item.product_name }}{% if item.diet_type %}<br><br><p>{{ item.diet_type }}</p>{% endif %}</li>
+					<li {% if item.product_id %}data-icon="info"{% endif %}>
+						{% if item.product_id %}
+						<a href="/product/{{ item.product_id }}/" data-transition="slideup">
+						{% endif %}
+						{{ item.product_name }}{% if item.diet_type %}<br><br><p>{{ item.diet_type }}</p>{% endif %}
+						{% if item.product_id %}
+						</a>
+						{% endif %}
+					</li>
 					{% endfor %}
 				{% endfor %}
 				{% if day.notes %}

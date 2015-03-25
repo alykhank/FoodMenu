@@ -16,6 +16,7 @@ KEY = os.environ.get("UWOPENDATA_APIKEY")
 MENU_ENDPOINT = "menu.json"
 LOCATIONS_ENDPOINT = "locations.json"
 OUTLETS_ENDPOINT = "outlets.json"
+PRODUCTS_ENDPOINT = "products/{}.json"
 AGGREGATE_MENU = "foodservices"
 app = Flask(__name__)
 cache = redis.from_url(os.environ.get("REDISTOGO_URL", "redis://localhost:6379"))
@@ -78,7 +79,14 @@ def index():
     foodservices = retrieve_all_outlet_details()
     return render_template("index.html", menu=foodservices, mixpanelToken=MIXPANEL_TOKEN)
 
-@app.route("/menu")
+@app.route("/product/<int:product_id>/")
+def product_info(product_id):
+    product = json.loads(retrieve(PRODUCTS_ENDPOINT.format(product_id)))["data"]
+    special_attributes = ["product_id", "product_name", "diet_id", "diet_type", "ingredients",
+                          "micro_nutrients", "tips", "serving_size", "serving_size_g"]
+    return render_template("product.html", product=product, special_attributes=special_attributes)
+
+@app.route("/menu/")
 def menu_api():
     """Serve menu data as JSON API."""
     foodservices = retrieve_all_outlet_details()
