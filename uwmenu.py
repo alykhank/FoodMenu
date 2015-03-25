@@ -2,6 +2,7 @@
 
 """Serve menu web view and API."""
 
+from collections import OrderedDict
 from datetime import datetime
 import json
 import os
@@ -21,16 +22,19 @@ cache = redis.from_url(os.environ.get("REDISTOGO_URL", "redis://localhost:6379")
 
 def retrieve(service):
     """Request service data from UW Open Data API as JSON HTTPResponse text."""
-    payload = {"key": KEY}
-    url = "https://api.uwaterloo.ca/v2/foodservices/" + service
-    resp = requests.get(url, params=payload).text
+    resp = cache.get(service)
+    if resp is None:
+        payload = {"key": KEY}
+        url = "https://api.uwaterloo.ca/v2/foodservices/" + service
+        resp = requests.get(url, params=payload).text
+        cache.set(service, resp, ex=60) # expire after 60 seconds
     return resp
 
 def retrieve_all_outlet_details():
     """Retrieve menu, locations, and outlets data then aggregate into single object."""
     foodservices = cache.get(AGGREGATE_MENU)
     if foodservices:
-        foodservices = json.loads(foodservices)
+        foodservices = json.loads(foodservices, object_pairs_hook=OrderedDict)
     else:
         menu = json.loads(retrieve(MENU_ENDPOINT))["data"]
         locations = json.loads(retrieve(LOCATIONS_ENDPOINT))["data"]
@@ -44,7 +48,8 @@ def retrieve_all_outlet_details():
             if location["outlet_id"] in eateries:
                 eateries[location["outlet_id"]]["location"] = location
             else:
-                eateries[location["outlet_id"]] = {"location": location}
+                eateries[location["outlet_id"]] = {"outlet_name": location["outlet_name"],
+                                                   "location": location}
         for outlet in outlets:
             daily_meals = []
             if outlet["has_breakfast"]: daily_meals += ["Breakfast"]
@@ -54,10 +59,11 @@ def retrieve_all_outlet_details():
                 eateries[outlet["outlet_id"]]["meals"] = daily_meals
             else:
                 eateries[outlet["outlet_id"]] = {"outlet_name": outlet["outlet_name"],
-                                                     "meals": daily_meals}
+                                                 "meals": daily_meals}
         foodservices["date"] = menu["date"]
-        foodservices["eateries"] = eateries
-        cache.set(AGGREGATE_MENU, json.dumps(foodservices), ex=60) # expire cached value after 60 seconds
+        foodservices["eateries"] = OrderedDict(sorted(eateries.items(),
+                                                      key=lambda t: t[1]["outlet_name"]))
+        cache.set(AGGREGATE_MENU, json.dumps(foodservices), ex=60) # expire after 60 seconds
     return foodservices
 
 def attach_filters():
