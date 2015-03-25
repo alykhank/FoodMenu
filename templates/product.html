@@ -7,10 +7,8 @@
 		</div><!-- header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true">
-				{% if product.diet_type %}
-					<li data-theme="b">{{ product.diet_type }}</li>
-				{% endif %}
-				{% set text_attributes = ["serving_size", "ingredients", "micro_nutrients", "tips"] %}
+				<li data-theme="b">{{ product.product_name }}</li>
+				{% set text_attributes = ["serving_size", "diet_type", "ingredients", "micro_nutrients", "tips"] %}
 				{% for attribute in text_attributes if product[attribute] %}
 					<li data-role="list-divider" data-theme="d">{{ attribute | replace("_", " ") | title }}</li>
 					<li>{{ product[attribute] }}</li>
