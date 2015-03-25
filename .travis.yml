@@ -4,4 +4,4 @@ install: "pip install -r requirements.txt"
 services:
   - redis-server
 # command to run tests
-script: python uwmenu_tests.py
+script: nosetests
