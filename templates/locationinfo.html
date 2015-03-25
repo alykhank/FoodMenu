@@ -1,15 +1,15 @@
-{% for restaurant in menu.outlets %}
-<div data-role="page" id="loc{{ restaurant.outlet_id }}{{ restaurant.location.building }}">
+{% for outlet_id, restaurant in menu.eateries.iteritems() if "location" in restaurant %}
+<div data-role="page" id="loc{{ outlet_id }}{{ restaurant.location.building }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Locations" class="ui-btn-left ui-icon-nodisc">Back</a>
-		<h1 class="title">{{ restaurant.outlet_name }}</h1>
+		<h1 class="title">{{ restaurant.location.outlet_name }}</h1>
 	</div><!-- header -->
 	<div data-role="content">
 		<ul data-role="listview" data-inset="false">
 			<li data-theme="d">
 				<a href="http://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
-					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
-					<h2>{{ restaurant.outlet_name }}</h2>
+					<img src="static/img/logos/{{outlet_id}}.png" alt="{{ restaurant.location.outlet_name }}">
+					<h2>{{ restaurant.location.outlet_name }}</h2>
 					<p>
 						{% set mdash = joiner("—") %}
 						{% if restaurant.meals %} {{ mdash() }}

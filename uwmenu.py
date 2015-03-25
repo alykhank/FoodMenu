@@ -10,14 +10,14 @@ from flask import Flask, render_template, jsonify
 import redis
 import requests
 
-MIXPANEL_TOKEN = os.environ.get('MIXPANEL_TOKEN')
-KEY = os.environ.get('UWOPENDATA_APIKEY')
+MIXPANEL_TOKEN = os.environ.get("MIXPANEL_TOKEN")
+KEY = os.environ.get("UWOPENDATA_APIKEY")
 MENU_ENDPOINT = "menu.json"
 LOCATIONS_ENDPOINT = "locations.json"
 OUTLETS_ENDPOINT = "outlets.json"
 AGGREGATE_MENU = "foodservices"
 app = Flask(__name__)
-cache = redis.from_url(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
+cache = redis.from_url(os.environ.get("REDISTOGO_URL", "redis://localhost:6379"))
 
 def retrieve(service):
     """Request service data from UW Open Data API as JSON HTTPResponse text."""
@@ -28,44 +28,55 @@ def retrieve(service):
 
 def retrieve_all_outlet_details():
     """Retrieve menu, locations, and outlets data then aggregate into single object."""
-    menu = cache.get(AGGREGATE_MENU)
-    if menu:
-        menu = json.loads(menu)
+    foodservices = cache.get(AGGREGATE_MENU)
+    if foodservices:
+        foodservices = json.loads(foodservices)
     else:
-        menu = json.loads(retrieve(MENU_ENDPOINT))['data']
-        locations = json.loads(retrieve(LOCATIONS_ENDPOINT))['data']
-        outlets = json.loads(retrieve(OUTLETS_ENDPOINT))['data']
-        for eatery in menu['outlets']:
-            for location in locations:
-                if eatery['outlet_id'] == location['outlet_id']:
-                    eatery['location'] = location
-            for outlet in outlets:
-                if eatery['outlet_id'] == outlet['outlet_id']:
-                    daily_meals = []
-                    if outlet['has_breakfast']: daily_meals += ['Breakfast']
-                    if outlet['has_lunch']: daily_meals += ['Lunch']
-                    if outlet['has_dinner']: daily_meals += ['Dinner']
-                    eatery['meals'] = daily_meals
-        cache.set(AGGREGATE_MENU, json.dumps(menu), ex=60) # expire cached value after 60 seconds
-    return menu
+        menu = json.loads(retrieve(MENU_ENDPOINT))["data"]
+        locations = json.loads(retrieve(LOCATIONS_ENDPOINT))["data"]
+        outlets = json.loads(retrieve(OUTLETS_ENDPOINT))["data"]
+
+        foodservices = {}
+        eateries = {}
+        for eatery in menu["outlets"]:
+            eateries[eatery["outlet_id"]] = eatery
+        for location in locations:
+            if location["outlet_id"] in eateries:
+                eateries[location["outlet_id"]]["location"] = location
+            else:
+                eateries[location["outlet_id"]] = {"location": location}
+        for outlet in outlets:
+            daily_meals = []
+            if outlet["has_breakfast"]: daily_meals += ["Breakfast"]
+            if outlet["has_lunch"]: daily_meals += ["Lunch"]
+            if outlet["has_dinner"]: daily_meals += ["Dinner"]
+            if outlet["outlet_id"] in eateries:
+                eateries[outlet["outlet_id"]]["meals"] = daily_meals
+            else:
+                eateries[outlet["outlet_id"]] = {"outlet_name": outlet["outlet_name"],
+                                                     "meals": daily_meals}
+        foodservices["date"] = menu["date"]
+        foodservices["eateries"] = eateries
+        cache.set(AGGREGATE_MENU, json.dumps(foodservices), ex=60) # expire cached value after 60 seconds
+    return foodservices
 
 def attach_filters():
     """Attach Jinja filters to app for use in templates."""
-    app.jinja_env.filters['fulldateformat'] = fulldateformat
-    app.jinja_env.filters['dateformat'] = dateformat
-    app.jinja_env.filters['timeformat'] = timeformat
+    app.jinja_env.filters["fulldateformat"] = fulldateformat
+    app.jinja_env.filters["dateformat"] = dateformat
+    app.jinja_env.filters["timeformat"] = timeformat
 
-@app.route('/')
+@app.route("/")
 def index():
     """Send menu and location data to templates."""
-    menu = retrieve_all_outlet_details()
-    return render_template('index.html', menu=menu, mixpanelToken=MIXPANEL_TOKEN)
+    foodservices = retrieve_all_outlet_details()
+    return render_template("index.html", menu=foodservices, mixpanelToken=MIXPANEL_TOKEN)
 
-@app.route('/menu')
+@app.route("/menu")
 def menu_api():
     """Serve menu data as JSON API."""
-    menu = retrieve_all_outlet_details()
-    return jsonify(menu)
+    foodservices = retrieve_all_outlet_details()
+    return jsonify(foodservices)
 
 def fulldateformat(value,
                    full_date_format="%Y-%m-%d",
@@ -89,7 +100,7 @@ def timeformat(value,
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
-    PORT = int(os.environ.get('PORT', 5000))
-    app.debug = os.environ.get('DEBUG')
+    PORT = int(os.environ.get("PORT", 5000))
+    app.debug = os.environ.get("DEBUG")
     attach_filters()
-    app.run(host='0.0.0.0', port=PORT)
+    app.run(host="0.0.0.0", port=PORT)

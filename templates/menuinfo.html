@@ -1,4 +1,4 @@
-{% for restaurant in menu.outlets if 'menu' in restaurant %}
+{% for outlet_id, restaurant in menu.eateries.iteritems() if 'menu' in restaurant %}
 <div data-role="page" id="r{{ restaurant.outlet_id }}">
 	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<a data-role="button" data-rel="back" data-icon="arrow-l" data-iconshadow="false" href="#Menu" class="ui-btn-left ui-icon-nodisc">Back</a>
