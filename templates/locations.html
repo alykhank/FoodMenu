@@ -12,7 +12,7 @@
 					<p>
 						{% set mdash = joiner("—") %}
 						{% if restaurant.meals %} {{ mdash() }}
-							{{ restaurant.meals | join(", ") }}
+							{{ restaurant.meals | map('first') | join(", ") }}
 						{% endif %}
 						{% if restaurant.location.building %} {{ mdash() }}
 							{{ restaurant.location.building }}
