@@ -1,0 +1,6 @@
+#!/bin/sh
+# Usage: script/run
+# Runs the webserver.
+
+[[ -f venv/bin/activate ]] && source venv/bin/activate
+foreman start

@@ -19,16 +19,21 @@
 
 ## Technologies
 
-* Hosted on [Heroku](http://www.heroku.com/)
-* Retrieves JSON data from the [University of Waterloo Open Data API](http://api.uwaterloo.ca/)
+* Hosted on [Heroku](https://www.heroku.com)
+* Retrieves JSON data from the [University of Waterloo Open Data API](http://api.uwaterloo.ca)
 * Caches some data using [Redis](http://redis.io)
-* Parses and displays data via [Flask](http://flask.pocoo.org/) with [Jinja2](http://jinja.pocoo.org/)
-* Uses [jQuery Mobile](http://jquerymobile.com/) for interface
+* Parses and displays data via [Flask](http://flask.pocoo.org) with [Jinja](http://jinja.pocoo.org)
+* Uses [jQuery Mobile](http://jquerymobile.com) for interface
 
 
-## Usage
+## Development
 
-* Store [UW Open Data API Key](http://api.uwaterloo.ca/#!/keygen) in `.env`
-	* `echo "UWOPENDATA_APIKEY=<KEY>" >> .env`
-	* [Local setup instructions](https://devcenter.heroku.com/articles/config-vars#local-setup)
-* Use `foreman start` to run application locally and access at [http://localhost:5000/](http://localhost:5000/)
+Prerequisites: Ensure pip, Virtualenv, and [Foreman](https://devcenter.heroku.com/articles/config-vars#local-setup) are installed. Redis will be installed via Homebrew if it is not already.
+Request a key for the [University of Waterloo Open Data API](http://api.uwaterloo.ca/apikey/).
+`script/bootstrap`
+`script/run`
+`open http://localhost:5000/`
+
+## Tests
+
+`script/test`
