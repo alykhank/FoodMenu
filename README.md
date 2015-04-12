@@ -1,4 +1,4 @@
-# [UW Menu](http://uwmenu.alykhan.com)
+# [UW Menu](http://uwmenu.com)
 
 [![Build Status](https://travis-ci.org/alykhank/FoodMenu.svg?branch=master)](https://travis-ci.org/alykhank/FoodMenu)
 [![Dependency Status](https://gemnasium.com/alykhank/FoodMenu.svg)](https://gemnasium.com/alykhank/FoodMenu)
@@ -8,9 +8,13 @@
 * Displays meals for the week at each on-campus eatery
 * Presents information including location and hours for each eatery
 
-![Menu](img/menu.png) ![Menu Info](img/menuinfo.png)
-![Locations](img/locations.png)![Location Info](img/locationinfo.png)
-![About](img/about.png)
+<img src="img/menu.png" alt="Menu" width="300px">
+<img src="img/menuinfo.png" alt="Menu Info" width="300px">
+
+<img src="img/locations.png" alt="Locations" width="300px">
+<img src="img/locationinfo.png" alt="Location Info" width="300px">
+
+<img src="img/about.png" alt="About" width="300px">
 
 
 ## Technologies
