@@ -24,7 +24,9 @@
 
 ## Development
 
-* Prerequisites: Ensure [pip](https://pip.pypa.io/en/stable/), [Virtualenv](https://virtualenv.pypa.io/en/latest/), and [Foreman](https://devcenter.heroku.com/articles/config-vars#local-setup) are installed. [Redis](http://redis.io) will be installed via [Homebrew](http://brew.sh) if it is not already
+* Prerequisites:
+  * Ensure [pip](https://pip.pypa.io/en/stable/), [Virtualenv](https://virtualenv.pypa.io/en/latest/), and [Foreman](https://devcenter.heroku.com/articles/config-vars#local-setup) are installed
+  * [Redis](http://redis.io) will be installed via [Homebrew](http://brew.sh) if it is not already
 * [Request a key](http://api.uwaterloo.ca/apikey/) for the UW Open Data API
 ```bash
 script/bootstrap
