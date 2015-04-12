@@ -21,5 +21,10 @@ class UWMenuTestCase(unittest.TestCase):
         rv = self.app.get('/')
         assert 'Weekly menus for the University of Waterloo\'s on-campus eateries.' in rv.data
 
+    def test_about_pageload(self):
+        """Ensure attribution on about page is present."""
+        rv = self.app.get('/')
+        assert 'This is an open source application available on GitHub' in rv.data
+
 if __name__ == "__main__":
     unittest.main()
