@@ -1,0 +1,7 @@
+#!/bin/sh
+# Usage: script/bootstrap
+# Ensures all modules are in virtualenv and installed locally.
+
+[[ -f venv/bin/activate ]] || virtualenv venv
+[[ -f venv/bin/activate ]] && source venv/bin/activate
+pip --quiet install --requirement requirements.txt
