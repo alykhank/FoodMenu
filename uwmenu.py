@@ -19,7 +19,7 @@ OUTLETS_ENDPOINT = "outlets.json"
 PRODUCTS_ENDPOINT = "products/{}.json"
 AGGREGATE_MENU = "foodservices"
 app = Flask(__name__)
-cache = redis.from_url(os.environ.get("REDISTOGO_URL", "redis://localhost:6379"))
+cache = redis.from_url(os.environ.get("REDIS_URL", "redis://localhost:6379"))
 
 def retrieve(service):
     """Request service data from UW Open Data API as JSON HTTPResponse text."""
