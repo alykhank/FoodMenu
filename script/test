@@ -3,4 +3,4 @@
 # Runs the test suite.
 
 [[ -f venv/bin/activate ]] && source venv/bin/activate
-foreman run nosetests
+heroku local:run nosetests

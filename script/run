@@ -3,4 +3,4 @@
 # Runs the webserver.
 
 [[ -f venv/bin/activate ]] && source venv/bin/activate
-foreman start
+heroku local
