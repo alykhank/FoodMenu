@@ -17,17 +17,17 @@
 ## Technologies
 
 * Hosted on [Heroku](https://www.heroku.com)
-* Retrieves JSON data from the [University of Waterloo Open Data API](http://api.uwaterloo.ca)
+* Retrieves JSON data from the [University of Waterloo Open Data API](https://api.uwaterloo.ca)
 * Caches some data using [Redis](http://redis.io)
 * Parses and displays data via [Flask](http://flask.pocoo.org) with [Jinja](http://jinja.pocoo.org)
-* Uses [jQuery Mobile](http://jquerymobile.com) for interface
+* Uses [jQuery Mobile](https://jquerymobile.com) for interface
 
 ## Development
 
 * Prerequisites:
   * Ensure [pip](https://pip.pypa.io/en/stable/), [Virtualenv](https://virtualenv.pypa.io/en/latest/), and [Heroku Toolbelt](https://toolbelt.heroku.com) are installed
   * [Redis](http://redis.io) will be installed via [Homebrew](http://brew.sh) if it is not already
-* [Request a key](http://api.uwaterloo.ca/apikey/) for the UW Open Data API
+* [Request a key](https://api.uwaterloo.ca/apikey/) for the UW Open Data API
 ```bash
 script/bootstrap
 script/run
