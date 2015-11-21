@@ -2,6 +2,7 @@
 
 """Test UW Menu Flask application."""
 
+import json
 import unittest
 
 from uwmenu import app, attach_filters
@@ -26,6 +27,11 @@ class UWMenuTestCase(unittest.TestCase):
         """Ensure attribution on about page is present."""
         rv = self.app.get('/')
         assert 'This is an open source application available on GitHub' in rv.data
+
+    def test_api_endpoint(self):
+        """Ensure API endpoint returns valid JSON."""
+        rv = self.app.get('/menu/')
+        assert json.loads(rv.data)
 
 
 if __name__ == "__main__":
