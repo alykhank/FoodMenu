@@ -1,41 +1,41 @@
 @font-face {
-	font-family: Nevis;
-	src: url('/static/fonts/nevis.eot'); /* IE9 Compat Modes */
-	src: url('/static/fonts/nevis.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-		url('/static/fonts/nevis.woff') format('woff'), /* Modern Browsers */
-		url('/static/fonts/nevis.ttf') format('truetype'), /* Safari, Android, iOS */
-		url('/static/fonts/nevis.svg#Nevis') format('svg'); /* Legacy iOS */
+  font-family: Nevis;
+  src: url('/static/fonts/nevis.eot'); /* IE9 Compat Modes */
+  src: url('/static/fonts/nevis.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/static/fonts/nevis.woff') format('woff'), /* Modern Browsers */
+    url('/static/fonts/nevis.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/static/fonts/nevis.svg#Nevis') format('svg'); /* Legacy iOS */
 }
 
 .title-fixed, .navlink {
-	font-family: Nevis, Helvetica, Arial, sans-serif;
-	font-weight: lighter;
-	text-transform: uppercase;
+  font-family: Nevis, Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  text-transform: uppercase;
 }
 
 .info {
-	text-align: center;
+  text-align: center;
 }
 
 .link {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 #description, #creator, #opensource {
-	font-size: medium;
+  font-size: medium;
 }
 
 #description {
-	font-family: Nevis, Helvetica, Arial, sans-serif;
-	font-weight: lighter;
+  font-family: Nevis, Helvetica, Arial, sans-serif;
+  font-weight: lighter;
 }
 
 #disclaimer {
-	font-size: x-small;
+  font-size: x-small;
 }
 
 .ui-listview>.ui-li-static {
+  overflow-wrap: break-word;
   white-space: normal !important;
   word-wrap:break-word;
-  overflow-wrap: break-word;
 }
