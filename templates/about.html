@@ -1,13 +1,13 @@
 <div data-role="page" id="About">
-	<div data-theme="b" data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+	<div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
 		<h1 class="title title-fixed">About</h1>
 	</div><!-- header -->
-	<div data-role="content">
+	<div role="main" class="ui-content">
 		<p id="creator" class="info">Created by <a href="http://alykhan.com" target="_blank" class="link">Alykhan Kanji</a>.</p>
 		<p id="opensource" class="info">This is an open source application available on GitHub <a href="https://github.com/alykhank/FoodMenu" target="_blank" class="link">here</a>.</p>
 		<p id="disclaimer" class="info">Contains information provided by the University of Waterloo under license on an 'as is' basis.</p>
 		<br>
-		<a data-role="button" href="mailto:uwmenu@alykhan.com" data-icon="star" data-iconpos="right" data-iconshadow="false" class="ui-icon-alt ui-icon-nodisc">Contact Me</a>
+		<a href="mailto:uwmenu@alykhan.com" class="ui-btn ui-corner-all ui-shadow ui-icon-star ui-btn-icon-right ui-alt-icon ui-nodisc-icon">Contact Me</a>
 	</div><!-- content -->
 	{% import 'footer.html' as footer %}
 	{{ footer.setFooter('About') }}
