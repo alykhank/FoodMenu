@@ -1,7 +1,10 @@
 language: python
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
 services:
   - redis-server
 # command to run tests
-script: nosetests
+script: nosetests --with-coverage --cover-package=uwmenu
+after_success: coveralls
