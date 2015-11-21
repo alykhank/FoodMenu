@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/alykhank/FoodMenu.svg?branch=master)](https://travis-ci.org/alykhank/FoodMenu)
 [![Dependency Status](https://gemnasium.com/alykhank/FoodMenu.svg)](https://gemnasium.com/alykhank/FoodMenu)
+[![Coverage Status](https://coveralls.io/repos/alykhank/FoodMenu/badge.svg?branch=master&service=github)](https://coveralls.io/github/alykhank/FoodMenu?branch=master)
+[![Code Climate](https://codeclimate.com/github/alykhank/FoodMenu/badges/gpa.svg)](https://codeclimate.com/github/alykhank/FoodMenu)
 
 * See meals for the week at each on-campus eatery, including nutrition facts
 * Browse locations and hours for eateries
@@ -28,6 +30,7 @@
   * Ensure [pip](https://pip.pypa.io/en/stable/), [Virtualenv](https://virtualenv.pypa.io/en/latest/), and [Heroku Toolbelt](https://toolbelt.heroku.com) are installed
   * [Redis](http://redis.io) will be installed via [Homebrew](http://brew.sh) if it is not already
 * [Request a key](https://api.uwaterloo.ca/apikey/) for the UW Open Data API
+
 ```bash
 script/bootstrap
 script/run
@@ -36,4 +39,6 @@ open http://localhost:5000/
 
 ## Tests
 
-`script/test`
+```bash
+script/test
+```

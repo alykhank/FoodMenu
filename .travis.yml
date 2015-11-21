@@ -8,3 +8,5 @@ services:
 # command to run tests
 script: nosetests --with-coverage --cover-package=uwmenu
 after_success: coveralls
+
+sudo: false
