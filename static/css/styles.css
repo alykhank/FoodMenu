@@ -33,3 +33,9 @@
 #disclaimer {
 	font-size: x-small;
 }
+
+.ui-listview>.ui-li-static {
+  white-space: normal !important;
+  word-wrap:break-word;
+  overflow-wrap: break-word;
+}
