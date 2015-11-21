@@ -1,40 +1,40 @@
 <div data-role="page" id="Menu">
-	<div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-		<h1 class="title title-fixed">UW Menu</h1>
-	</div><!-- header -->
-	<div role="main" class="ui-content">
-		<p id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</p>
-		<br>
-		<ul data-role="listview" data-inset="false" class="ui-alt-icon ui-nodisc-icon">
-			<li data-role="list-divider">{{ menu.date.start | dateformat }} – {{ menu.date.end | dateformat }}</li>
-			{% for outlet_id, restaurant in menu.eateries.iteritems() if "menu" in restaurant %}
-				<li class="ui-li-has-thumb" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})">
-					<a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">
-						<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
-						<h2>{{ restaurant.outlet_name }}</h2>
-						<p>
-							{% set mdash = joiner("—") %}
-							{% if restaurant.meals %} {{ mdash() }}
-								{{ restaurant.meals | map('first') | join(", ") }}
-							{% endif %}
-							{% if restaurant.location.building %} {{ mdash() }}
-								{{ restaurant.location.building }}
-							{% endif %}
-						</p>
-						<span class="ui-li-count">
-							{% if restaurant.location.is_open_now %}
-							Open
-							{% else %}
-							Closed
-							{% endif %}
-						</span>
-					</a>
-				</li>
-			{% else %}
-				<li>No data has been provided for the current period.</li>
-			{% endfor %}
-		</ul>
-	</div><!-- content -->
-	{% import 'footer.html' as footer %}
-	{{ footer.setFooter('Menu') }}
+  <div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+    <h1 class="title title-fixed">UW Menu</h1>
+  </div><!-- header -->
+  <div role="main" class="ui-content">
+    <p id="description" class="info">Weekly menus for the University of Waterloo's on-campus eateries.</p>
+    <br>
+    <ul data-role="listview" data-inset="false" class="ui-alt-icon ui-nodisc-icon">
+      <li data-role="list-divider">{{ menu.date.start | dateformat }} – {{ menu.date.end | dateformat }}</li>
+      {% for outlet_id, restaurant in menu.eateries.iteritems() if "menu" in restaurant %}
+        <li class="ui-li-has-thumb" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})">
+          <a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">
+            <img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
+            <h2>{{ restaurant.outlet_name }}</h2>
+            <p>
+              {% set mdash = joiner("—") %}
+              {% if restaurant.meals %} {{ mdash() }}
+                {{ restaurant.meals | map('first') | join(", ") }}
+              {% endif %}
+              {% if restaurant.location.building %} {{ mdash() }}
+                {{ restaurant.location.building }}
+              {% endif %}
+            </p>
+            <span class="ui-li-count">
+              {% if restaurant.location.is_open_now %}
+              Open
+              {% else %}
+              Closed
+              {% endif %}
+            </span>
+          </a>
+        </li>
+      {% else %}
+        <li>No data has been provided for the current period.</li>
+      {% endfor %}
+    </ul>
+  </div><!-- content -->
+  {% import 'footer.html' as footer %}
+  {{ footer.setFooter('Menu') }}
 </div><!-- page -->

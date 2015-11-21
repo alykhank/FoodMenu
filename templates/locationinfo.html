@@ -1,62 +1,62 @@
 {% for outlet_id, restaurant in menu.eateries.iteritems() if "location" in restaurant %}
 <div data-role="page" id="loc{{ outlet_id }}{{ restaurant.location.building }}">
-	<div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-		<a data-rel="back" href="#Locations" class="ui-btn ui-btn-left ui-corner-all ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
-		<h1 class="title">{{ restaurant.location.outlet_name }}</h1>
-	</div><!-- header -->
-	<div role="main" class="ui-content">
-		<ul data-role="listview" data-inset="false">
-			<li class="ui-li-has-thumb">
-				<a href="https://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
-					<img src="static/img/logos/{{outlet_id}}.png" alt="{{ restaurant.location.outlet_name }}">
-					<h2>{{ restaurant.location.outlet_name }}</h2>
-					<p>
-						{% set mdash = joiner("—") %}
-						{% if restaurant.meals %} {{ mdash() }}
-							{{ restaurant.meals | join(", ") }}
-						{% endif %}
-						{% if restaurant.location.building %} {{ mdash() }}
-							{{ restaurant.location.building }}
-						{% endif %}
-					</p>
-					<span class="ui-li-count">
-						{% if restaurant.location.is_open_now %}
-						Open
-						{% else %}
-						Closed
-						{% endif %}
-					</span>
-				</a>
-			</li>
-			{% if restaurant.location.description %}
-				<li data-role="list-divider" data-theme="b">Description</li>
-				<li>{{ restaurant.location.description | safe }}</li>
-			{% endif %}
-			{% if restaurant.location.notice %}
-				<li data-role="list-divider" data-theme="b">Notices</li>
-				<li>{{ restaurant.location.notice }}</li>
-			{% endif %}
-			{% if restaurant.location.dates_closed %}
-				<li data-role="list-divider" data-theme="b">Dates Closed</li>
-				<li>{{ restaurant.location.dates_closed | map('fulldateformat') | join(', ') }}</li>
-			{% endif %}
-			{% if restaurant.location.opening_hours %}
-				<li data-role="list-divider" data-theme="b">Hours</li>
-				{% set days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
-				{% for day in days %}
-					{% if day in restaurant.location.opening_hours.keys() %}
-						<li data-role="list-divider">{{ day | capitalize }}</li>
-						{% if restaurant.location.opening_hours[day].is_closed %}
-							<li>CLOSED</li>
-						{% else %}
-							<li>{{ restaurant.location.opening_hours[day].opening_hour | timeformat }} – {{ restaurant.location.opening_hours[day].closing_hour | timeformat }}</li>
-						{% endif %}
-					{% endif %}
-				{% endfor %}
-			{% endif %}
-		</ul>
-	</div><!-- content -->
-	{% import 'footer.html' as footer %}
-	{{ footer.setFooter('Locations') }}
+  <div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+    <a data-rel="back" href="#Locations" class="ui-btn ui-btn-left ui-corner-all ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
+    <h1 class="title">{{ restaurant.location.outlet_name }}</h1>
+  </div><!-- header -->
+  <div role="main" class="ui-content">
+    <ul data-role="listview" data-inset="false">
+      <li class="ui-li-has-thumb">
+        <a href="https://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
+          <img src="static/img/logos/{{outlet_id}}.png" alt="{{ restaurant.location.outlet_name }}">
+          <h2>{{ restaurant.location.outlet_name }}</h2>
+          <p>
+            {% set mdash = joiner("—") %}
+            {% if restaurant.meals %} {{ mdash() }}
+              {{ restaurant.meals | join(", ") }}
+            {% endif %}
+            {% if restaurant.location.building %} {{ mdash() }}
+              {{ restaurant.location.building }}
+            {% endif %}
+          </p>
+          <span class="ui-li-count">
+            {% if restaurant.location.is_open_now %}
+            Open
+            {% else %}
+            Closed
+            {% endif %}
+          </span>
+        </a>
+      </li>
+      {% if restaurant.location.description %}
+        <li data-role="list-divider" data-theme="b">Description</li>
+        <li>{{ restaurant.location.description | safe }}</li>
+      {% endif %}
+      {% if restaurant.location.notice %}
+        <li data-role="list-divider" data-theme="b">Notices</li>
+        <li>{{ restaurant.location.notice }}</li>
+      {% endif %}
+      {% if restaurant.location.dates_closed %}
+        <li data-role="list-divider" data-theme="b">Dates Closed</li>
+        <li>{{ restaurant.location.dates_closed | map('fulldateformat') | join(', ') }}</li>
+      {% endif %}
+      {% if restaurant.location.opening_hours %}
+        <li data-role="list-divider" data-theme="b">Hours</li>
+        {% set days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
+        {% for day in days %}
+          {% if day in restaurant.location.opening_hours.keys() %}
+            <li data-role="list-divider">{{ day | capitalize }}</li>
+            {% if restaurant.location.opening_hours[day].is_closed %}
+              <li>CLOSED</li>
+            {% else %}
+              <li>{{ restaurant.location.opening_hours[day].opening_hour | timeformat }} – {{ restaurant.location.opening_hours[day].closing_hour | timeformat }}</li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </div><!-- content -->
+  {% import 'footer.html' as footer %}
+  {{ footer.setFooter('Locations') }}
 </div><!-- page -->
 {% endfor %}

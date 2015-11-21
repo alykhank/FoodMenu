@@ -1,58 +1,58 @@
 {% for outlet_id, restaurant in menu.eateries.iteritems() if 'menu' in restaurant %}
 <div data-role="page" id="r{{ restaurant.outlet_id }}">
-	<div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
-		<a data-rel="back" href="#Menu" class="ui-btn ui-btn-left ui-corner-all ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
-		<h1 class="title">{{ restaurant.outlet_name }}</h1>
-	</div><!-- header -->
-	<div role="main" class="ui-content">
-		<ul data-role="listview" data-inset="false">
-			<li class="ui-li-has-thumb">
-				<a href="https://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
-					<img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
-					<h2>{{ restaurant.outlet_name }}</h2>
-					<p>
-						{% set mdash = joiner("—") %}
-						{% if restaurant.meals %} {{ mdash() }}
-							{{ restaurant.meals | join(", ") }}
-						{% endif %}
-						{% if restaurant.location.building %} {{ mdash() }}
-							{{ restaurant.location.building }}
-						{% endif %}
-					</p>
-					<span class="ui-li-count">
-						{% if restaurant.location.is_open_now %}
-						Open
-						{% else %}
-						Closed
-						{% endif %}
-					</span>
-				</a>
-			</li>
-			{% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
-			{% for day in restaurant.menu %}
-				<li data-role="list-divider" data-theme="b">{{ day.day }}</li>
-				{% set meals = ['breakfast', 'lunch', 'dinner'] %}
-				{% for meal in meals if meal in day.meals.keys() and day.meals[meal] %}
-					<li data-role="list-divider">{{ meal|capitalize }}</li>
-					{% for item in day.meals[meal] %}
-					<li {% if item.product_id %}data-icon="info"{% endif %}>
-						{% if item.product_id %}
-						<a href="/product/{{ item.product_id }}/" data-transition="slideup">
-						{% endif %}
-						{{ item.product_name }}{% if item.diet_type %}<br><br><p>{{ item.diet_type }}</p>{% endif %}
-						{% if item.product_id %}
-						</a>
-						{% endif %}
-					</li>
-					{% endfor %}
-				{% endfor %}
-				{% if day.notes %}
-					<li data-role="list-divider">Notes: {{ day.notes }}</li>
-				{% endif %}
-			{% endfor %}
-		</ul><!-- listview -->
-	</div><!-- content -->
-	{% import 'footer.html' as footer %}
-	{{ footer.setFooter('Menu') }}
+  <div data-role="header" data-position="fixed" data-disable-page-zoom="true" data-tap-toggle="false">
+    <a data-rel="back" href="#Menu" class="ui-btn ui-btn-left ui-corner-all ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
+    <h1 class="title">{{ restaurant.outlet_name }}</h1>
+  </div><!-- header -->
+  <div role="main" class="ui-content">
+    <ul data-role="listview" data-inset="false">
+      <li class="ui-li-has-thumb">
+        <a href="https://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
+          <img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
+          <h2>{{ restaurant.outlet_name }}</h2>
+          <p>
+            {% set mdash = joiner("—") %}
+            {% if restaurant.meals %} {{ mdash() }}
+              {{ restaurant.meals | join(", ") }}
+            {% endif %}
+            {% if restaurant.location.building %} {{ mdash() }}
+              {{ restaurant.location.building }}
+            {% endif %}
+          </p>
+          <span class="ui-li-count">
+            {% if restaurant.location.is_open_now %}
+            Open
+            {% else %}
+            Closed
+            {% endif %}
+          </span>
+        </a>
+      </li>
+      {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
+      {% for day in restaurant.menu %}
+        <li data-role="list-divider" data-theme="b">{{ day.day }}</li>
+        {% set meals = ['breakfast', 'lunch', 'dinner'] %}
+        {% for meal in meals if meal in day.meals.keys() and day.meals[meal] %}
+          <li data-role="list-divider">{{ meal|capitalize }}</li>
+          {% for item in day.meals[meal] %}
+          <li {% if item.product_id %}data-icon="info"{% endif %}>
+            {% if item.product_id %}
+            <a href="/product/{{ item.product_id }}/" data-transition="slideup">
+            {% endif %}
+            {{ item.product_name }}{% if item.diet_type %}<br><br><p>{{ item.diet_type }}</p>{% endif %}
+            {% if item.product_id %}
+            </a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        {% endfor %}
+        {% if day.notes %}
+          <li data-role="list-divider">Notes: {{ day.notes }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul><!-- listview -->
+  </div><!-- content -->
+  {% import 'footer.html' as footer %}
+  {{ footer.setFooter('Menu') }}
 </div><!-- page -->
 {% endfor %}

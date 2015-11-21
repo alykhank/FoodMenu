@@ -2,7 +2,7 @@
 # Usage: script/bootstrap
 # Ensures UWOPENDATA_APIKEY is set, all modules are in virtualenv and installed locally, and that Redis is running.
 
-if [[ -z "$UWOPENDATA_APIKEY" ]] && ! grep UWOPENDATA_APIKEY= .env >/dev/null 2>&1; then
+if [[ -z "$UWOPENDATA_APIKEY" ]] && ! grep "UWOPENDATA_APIKEY=" .env >/dev/null 2>&1; then
   echo "Enter your key for the University of Waterloo Open Data API:"
   read UWOPENDATA_APIKEY
   echo "UWOPENDATA_APIKEY=$UWOPENDATA_APIKEY" >> .env
