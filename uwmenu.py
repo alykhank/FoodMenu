@@ -21,6 +21,7 @@ AGGREGATE_MENU = "foodservices"
 app = Flask(__name__)
 cache = redis.from_url(os.environ.get("REDIS_URL", "redis://localhost:6379"))
 
+
 def retrieve(service):
     """Request service data from UW Open Data API as JSON HTTPResponse text."""
     resp = cache.get(service)
@@ -28,8 +29,9 @@ def retrieve(service):
         payload = {"key": KEY}
         url = "https://api.uwaterloo.ca/v2/foodservices/" + service
         resp = requests.get(url, params=payload).text
-        cache.set(service, resp, ex=60) # expire after 60 seconds
+        cache.set(service, resp, ex=60)  # expire after 60 seconds
     return resp
+
 
 def retrieve_all_outlet_details():
     """Retrieve menu, locations, and outlets data then aggregate into single object."""
@@ -53,9 +55,12 @@ def retrieve_all_outlet_details():
                                                    "location": location}
         for outlet in outlets:
             daily_meals = []
-            if outlet["has_breakfast"]: daily_meals += ["Breakfast"]
-            if outlet["has_lunch"]: daily_meals += ["Lunch"]
-            if outlet["has_dinner"]: daily_meals += ["Dinner"]
+            if outlet["has_breakfast"]:
+                daily_meals += ["Breakfast"]
+            if outlet["has_lunch"]:
+                daily_meals += ["Lunch"]
+            if outlet["has_dinner"]:
+                daily_meals += ["Dinner"]
             if outlet["outlet_id"] in eateries:
                 eateries[outlet["outlet_id"]]["meals"] = daily_meals
             else:
@@ -64,8 +69,9 @@ def retrieve_all_outlet_details():
         foodservices["date"] = menu["date"]
         foodservices["eateries"] = OrderedDict(sorted(eateries.items(),
                                                       key=lambda t: t[1]["outlet_name"]))
-        cache.set(AGGREGATE_MENU, json.dumps(foodservices), ex=60) # expire after 60 seconds
+        cache.set(AGGREGATE_MENU, json.dumps(foodservices), ex=60)  # expire after 60 seconds
     return foodservices
+
 
 def attach_filters():
     """Attach Jinja filters to app for use in templates."""
@@ -73,11 +79,13 @@ def attach_filters():
     app.jinja_env.filters["dateformat"] = dateformat
     app.jinja_env.filters["timeformat"] = timeformat
 
+
 @app.route("/")
 def index():
     """Send menu and location data to templates."""
     foodservices = retrieve_all_outlet_details()
     return render_template("index.html", menu=foodservices, mixpanelToken=MIXPANEL_TOKEN)
+
 
 @app.route("/product/<int:product_id>/")
 def product_info(product_id):
@@ -86,11 +94,13 @@ def product_info(product_id):
                           "micro_nutrients", "tips", "serving_size", "serving_size_g"]
     return render_template("product.html", product=product, special_attributes=special_attributes)
 
+
 @app.route("/menu/")
 def menu_api():
     """Serve menu data as JSON API."""
     foodservices = retrieve_all_outlet_details()
     return jsonify(foodservices)
+
 
 def fulldateformat(value,
                    full_date_format="%Y-%m-%d",
@@ -98,6 +108,8 @@ def fulldateformat(value,
     """Convert datetimes from 'Y-m-d' to 'd/m/Y'."""
     date = datetime.strptime(value, full_date_format)
     return friendly_format.format(date=date)
+
+
 def dateformat(value,
                full_date_format="%Y-%m-%d",
                month_day_format="{date:%B} {date.day}"):
@@ -105,12 +117,14 @@ def dateformat(value,
     date = datetime.strptime(value, full_date_format)
     return month_day_format.format(date=date)
 
+
 def timeformat(value,
                full_time_format="%H:%M",
                friendly_format="{time:%l}:{time.minute:02} {time:%p}"):
     """Convert datetimes from 'H:M' to 'I:M p'."""
     time = datetime.strptime(value, full_time_format)
     return friendly_format.format(time=time)
+
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.

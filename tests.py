@@ -6,6 +6,7 @@ import unittest
 
 from uwmenu import app, attach_filters
 
+
 class UWMenuTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -25,6 +26,7 @@ class UWMenuTestCase(unittest.TestCase):
         """Ensure attribution on about page is present."""
         rv = self.app.get('/')
         assert 'This is an open source application available on GitHub' in rv.data
+
 
 if __name__ == "__main__":
     unittest.main()
