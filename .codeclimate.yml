@@ -5,4 +5,3 @@ exclude_paths:
 - "img/*"
 - "static/fonts/*"
 - "static/img/**/*"
-- "static/thirdparty/**/*"
