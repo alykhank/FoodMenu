@@ -17,10 +17,11 @@
               {% if restaurant.meals %} {{ mdash() }}
                 {{ restaurant.meals | map('first') | join(", ") }}
               {% endif %}
-              {% if restaurant.location.building %} {{ mdash() }}
+              {% if restaurant.location and restaurant.location.building %} {{ mdash() }}
                 {{ restaurant.location.building }}
               {% endif %}
             </p>
+            {% if restaurant.location %}
             <span class="ui-li-count">
               {% if restaurant.location.is_open_now %}
               Open
@@ -28,6 +29,7 @@
               Closed
               {% endif %}
             </span>
+            {% endif %}
           </a>
         </li>
       {% else %}

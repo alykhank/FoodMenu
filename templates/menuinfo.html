@@ -7,7 +7,7 @@
   <div role="main" class="ui-content">
     <ul data-role="listview" data-inset="false">
       <li class="ui-li-has-thumb">
-        <a href="https://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}">
+        <a {% if restaurant.location %}href="https://maps.apple.com/?q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}"{% endif %}>
           <img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">
           <h2>{{ restaurant.outlet_name }}</h2>
           <p>
@@ -15,10 +15,11 @@
             {% if restaurant.meals %} {{ mdash() }}
               {{ restaurant.meals | join(", ") }}
             {% endif %}
-            {% if restaurant.location.building %} {{ mdash() }}
+            {% if restaurant.location and restaurant.location.building %} {{ mdash() }}
               {{ restaurant.location.building }}
             {% endif %}
           </p>
+          {% if restaurant.location %}
           <span class="ui-li-count">
             {% if restaurant.location.is_open_now %}
             Open
@@ -26,6 +27,7 @@
             Closed
             {% endif %}
           </span>
+          {% endif %}
         </a>
       </li>
       {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
