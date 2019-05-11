@@ -7,7 +7,7 @@
     <br>
     <ul data-role="listview" data-inset="false" class="ui-alt-icon ui-nodisc-icon">
       <li data-role="list-divider">{{ menu.date.start | dateformat }} – {{ menu.date.end | dateformat }}</li>
-      {% for outlet_id, restaurant in menu.eateries.iteritems() if "menu" in restaurant %}
+      {% for outlet_id, restaurant in menu.eateries.items() if "menu" in restaurant %}
         <li class="ui-li-has-thumb" onclick="mixpanel.track('Restaurant View', {'Restaurant Name': '{{restaurant.outlet_name}}'})">
           <a href="#r{{ restaurant.outlet_id }}" data-transition="slidefade">
             <img src="static/img/logos/{{restaurant.outlet_id}}.png" alt="{{ restaurant.outlet_name }}">

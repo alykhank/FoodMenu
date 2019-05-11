@@ -7,7 +7,7 @@
       <input id="filter-input" data-type="search" placeholder="Search locations…">
     </form>
     <ul data-role="listview" data-inset="false" data-filter="true" data-input="#filter-input" class="ui-alt-icon ui-nodisc-icon">
-    {% for outlet_id, restaurant in menu.eateries.iteritems() if "location" in restaurant %}
+    {% for outlet_id, restaurant in menu.eateries.items() if "location" in restaurant %}
       <li class="ui-li-has-thumb" onclick="mixpanel.track('Location View', {'ID': '{{restaurant.outlet_id}}', 'Name': '{{restaurant.outlet_name}}', 'Location': '{{restaurant.location.building}}'})">
         <a href="#loc{{ outlet_id }}{{ restaurant.location.building }}" data-transition="slidefade">
           <img src="static/img/logos/{{outlet_id}}.png" alt="{{ restaurant.location.outlet_name }}">

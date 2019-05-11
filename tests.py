@@ -21,12 +21,12 @@ class UWMenuTestCase(unittest.TestCase):
     def test_menu_pageload(self):
         """Ensure description on menu page is present."""
         rv = self.app.get('/')
-        assert 'Weekly menus for the University of Waterloo\'s on-campus eateries.' in rv.data
+        assert b'Weekly menus for the University of Waterloo\'s on-campus eateries.' in rv.data
 
     def test_about_pageload(self):
         """Ensure attribution on about page is present."""
         rv = self.app.get('/')
-        assert 'This is an open source application available on GitHub' in rv.data
+        assert b'This is an open source application available on GitHub' in rv.data
 
     def test_api_endpoint(self):
         """Ensure API endpoint returns valid JSON."""

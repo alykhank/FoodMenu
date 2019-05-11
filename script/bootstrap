@@ -7,7 +7,7 @@ if [[ -z "$UWOPENDATA_APIKEY" ]] && ! grep "UWOPENDATA_APIKEY=" .env >/dev/null 
   read UWOPENDATA_APIKEY
   echo "UWOPENDATA_APIKEY=$UWOPENDATA_APIKEY" >> .env
 fi
-[[ -f venv/bin/activate ]] || virtualenv venv
+[[ -f venv/bin/activate ]] || python3 -m venv venv
 [[ -f venv/bin/activate ]] && source venv/bin/activate
 pip --quiet install --requirement requirements.txt
 if ! hash redis-cli 2>/dev/null; then
