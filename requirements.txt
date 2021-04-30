@@ -13,5 +13,5 @@ pyparsing==2.2.0
 redis==3.2.1
 requests==2.22.0
 six==1.10.0
-urllib3==1.25.6
+urllib3==1.25.8
 Werkzeug==0.16.0
